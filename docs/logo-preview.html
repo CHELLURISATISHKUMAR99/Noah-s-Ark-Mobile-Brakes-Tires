@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo Preview — Noah’s Ark Mobile Brakes &amp; Tires</title>
+<style>
+  :root{
+    --charcoal:#16181A; --warm:#F5F2EA; --orange:#F05A28; --steel:#8C9298;
+    --line:#d9d5cb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--warm);color:var(--charcoal);
+       font:14px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:40px 32px 28px;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 6px;font-size:26px;letter-spacing:-.4px}
+  header p{margin:0;color:#5b5f63;max-width:70ch}
+  .warn{margin:18px 32px 0;padding:12px 16px;border-left:3px solid var(--orange);
+        background:#fff;font-size:13px;max-width:90ch}
+  section{padding:34px 32px;border-bottom:1px solid var(--line)}
+  h2{margin:0 0 4px;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#5b5f63}
+  .note{margin:0 0 20px;color:#5b5f63;font-size:13px;max-width:80ch}
+  .grid{display:flex;flex-wrap:wrap;gap:20px}
+  .panel{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff;flex:1 1 340px}
+  .panel .cap{padding:8px 12px;font-size:11px;letter-spacing:.6px;text-transform:uppercase;
+              color:#5b5f63;border-bottom:1px solid var(--line);background:#fbfaf7}
+  .stage{padding:28px;display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;min-height:120px}
+  .on-light{background:var(--warm)}
+  .on-white{background:#fff}
+  .on-dark{background:var(--charcoal)}
+  .on-steel{background:var(--steel)}
+  .on-orange{background:var(--orange)}
+  .swatchrow{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .sw{padding:16px 18px;min-width:170px;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+  figcaption{font-size:11px;color:#5b5f63;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .on-dark figcaption{color:#a8adb2}
+  .ruler{display:flex;align-items:flex-end;gap:30px;flex-wrap:wrap}
+  img{display:block}
+  .px16{width:16px}.px24{width:24px}.px32{width:32px}.px48{width:48px}
+  .w160{width:160px}.w240{width:240px}.w360{width:360px}
+  .shield80{width:80px}.shield120{width:120px}
+  table{border-collapse:collapse;width:100%;max-width:900px;font-size:13px}
+  th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
+  th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#5b5f63}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#fff;
+       padding:1px 5px;border:1px solid var(--line);border-radius:3px}
+  .bad{color:#a3301a;font-weight:600}
+  .good{color:#1d6b3f;font-weight:600}
+  .checker{background-image:linear-gradient(45deg,#e6e2d8 25%,transparent 25%),
+    linear-gradient(-45deg,#e6e2d8 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#e6e2d8 75%),
+    linear-gradient(-45deg,transparent 75%,#e6e2d8 75%);
+    background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mobile Service Shield — logo system</h1>
+  <p>Noah’s Ark Mobile Brakes &amp; Tires. Hand-built flat vector geometry: no gradients,
+     shadows, glows, bevels, textures or raster data. Every file is a fill-only SVG with a
+     <code>viewBox</code>, so it scales without thinning any line.</p>
+</header>
+
+<div class="warn">
+  <strong>Not approved yet.</strong> This page exists so you can visually review the marks.
+  Nothing here has been signed off, and the React site has not been touched.
+</div>
+
+<section>
+  <h2>Palette</h2>
+  <p class="note">The four approved colors. Contrast ratios drove two construction decisions —
+     see “Contrast constraints” at the bottom.</p>
+  <div class="swatchrow">
+    <div class="sw" style="background:#16181A;color:#F5F2EA">Charcoal<br>#16181A</div>
+    <div class="sw" style="background:#F5F2EA;color:#16181A">Warm white<br>#F5F2EA</div>
+    <div class="sw" style="background:#F05A28;color:#16181A">Safety orange<br>#F05A28</div>
+    <div class="sw" style="background:#8C9298;color:#16181A">Steel gray<br>#8C9298</div>
+  </div>
+</section>
+
+<section>
+  <h2>1 — Horizontal lockups</h2>
+  <p class="note">Shield left, name right. Each version is shown on the background it is built for.</p>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">logo-horizontal-dark.svg — for light backgrounds</div>
+      <div class="stage on-light"><img class="w360" src="../public/assets/logo/logo-horizontal-dark.svg" alt="Horizontal dark logo"></div>
+      <div class="stage on-white"><img class="w360" src="../public/assets/logo/logo-horizontal-dark.svg" alt="Horizontal dark logo on white"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">logo-horizontal-light.svg — for dark backgrounds</div>
+      <div class="stage on-dark"><img class="w360" src="../public/assets/logo/logo-horizontal-light.svg" alt="Horizontal light logo"></div>
+      <div class="stage on-steel"><img class="w360" src="../public/assets/logo/logo-horizontal-light.svg" alt="Horizontal light logo on steel gray"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2 — Horizontal legibility: 160px, 240px, 360px</h2>
+  <p class="note">160px is the stated minimum width. Check that the second line
+     (MOBILE BRAKES &amp; TIRES) still resolves at 160px on your display.</p>
+  <div class="panel">
+    <div class="cap">on light</div>
+    <div class="stage on-light ruler">
+      <figure><img class="w160" src="../public/assets/logo/logo-horizontal-dark.svg" alt="160px"><figcaption>160px — minimum</figcaption></figure>
+      <figure><img class="w240" src="../public/assets/logo/logo-horizontal-dark.svg" alt="240px"><figcaption>240px</figcaption></figure>
+      <figure><img class="w360" src="../public/assets/logo/logo-horizontal-dark.svg" alt="360px"><figcaption>360px</figcaption></figure>
+    </div>
+    <div class="cap">on dark</div>
+    <div class="stage on-dark ruler">
+      <figure><img class="w160" src="../public/assets/logo/logo-horizontal-light.svg" alt="160px"><figcaption>160px — minimum</figcaption></figure>
+      <figure><img class="w240" src="../public/assets/logo/logo-horizontal-light.svg" alt="240px"><figcaption>240px</figcaption></figure>
+      <figure><img class="w360" src="../public/assets/logo/logo-horizontal-light.svg" alt="360px"><figcaption>360px</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3 — Stacked lockup</h2>
+  <p class="note">Shield above the name. Built for light backgrounds.</p>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">logo-stacked.svg</div>
+      <div class="stage on-light"><img style="width:230px" src="../public/assets/logo/logo-stacked.svg" alt="Stacked logo"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">logo-stacked.svg at 150px wide</div>
+      <div class="stage on-white"><img style="width:150px" src="../public/assets/logo/logo-stacked.svg" alt="Stacked logo small"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>4 — Shield symbol, full color</h2>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">logo-shield-color.svg — on light</div>
+      <div class="stage on-light">
+        <figure><img class="shield120" src="../public/assets/logo/logo-shield-color.svg" alt="Shield 120"><figcaption>120px</figcaption></figure>
+        <figure><img class="shield80" src="../public/assets/logo/logo-shield-color.svg" alt="Shield 80"><figcaption>80px</figcaption></figure>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="cap">logo-shield-color.svg — on dark / on orange</div>
+      <div class="stage on-dark"><img class="shield120" src="../public/assets/logo/logo-shield-color.svg" alt="Shield on dark"></div>
+      <div class="stage on-orange"><img class="shield120" src="../public/assets/logo/logo-shield-color.svg" alt="Shield on orange"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>5 — Icon size tests: 16px, 24px, 32px, 48px</h2>
+  <p class="note">The 24px row is the stated floor for the shield-only mark. The favicon is the
+     simplified symbol and is the one to judge at 16px.</p>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">favicon.svg — simplified, on light</div>
+      <div class="stage on-light ruler">
+        <figure><img class="px16" src="../public/assets/logo/favicon.svg" alt="16"><figcaption>16px</figcaption></figure>
+        <figure><img class="px24" src="../public/assets/logo/favicon.svg" alt="24"><figcaption>24px</figcaption></figure>
+        <figure><img class="px32" src="../public/assets/logo/favicon.svg" alt="32"><figcaption>32px</figcaption></figure>
+        <figure><img class="px48" src="../public/assets/logo/favicon.svg" alt="48"><figcaption>48px</figcaption></figure>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="cap">favicon.svg — on dark</div>
+      <div class="stage on-dark ruler">
+        <figure><img class="px16" src="../public/assets/logo/favicon.svg" alt="16"><figcaption>16px</figcaption></figure>
+        <figure><img class="px24" src="../public/assets/logo/favicon.svg" alt="24"><figcaption>24px</figcaption></figure>
+        <figure><img class="px32" src="../public/assets/logo/favicon.svg" alt="32"><figcaption>32px</figcaption></figure>
+        <figure><img class="px48" src="../public/assets/logo/favicon.svg" alt="48"><figcaption>48px</figcaption></figure>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="cap">logo-shield-color.svg — full mark at icon sizes</div>
+      <div class="stage on-light ruler">
+        <figure><img class="px16" src="../public/assets/logo/logo-shield-color.svg" alt="16"><figcaption>16px — too small, use favicon</figcaption></figure>
+        <figure><img class="px24" src="../public/assets/logo/logo-shield-color.svg" alt="24"><figcaption>24px — minimum</figcaption></figure>
+        <figure><img class="px32" src="../public/assets/logo/logo-shield-color.svg" alt="32"><figcaption>32px</figcaption></figure>
+        <figure><img class="px48" src="../public/assets/logo/logo-shield-color.svg" alt="48"><figcaption>48px</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>6 — One-color reproduction</h2>
+  <p class="note">For embroidery, vinyl, etching, fax and single-plate print. Interior detail is
+     knocked out to the background rather than painted, so these work on any surface. The
+     checkerboard shows the knockouts are genuinely transparent.</p>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">logo-shield-black.svg</div>
+      <div class="stage on-white ruler">
+        <figure><img class="shield120" src="../public/assets/logo/logo-shield-black.svg" alt="Black shield"><figcaption>120px</figcaption></figure>
+        <figure><img class="px48" src="../public/assets/logo/logo-shield-black.svg" alt="48"><figcaption>48px</figcaption></figure>
+        <figure><img class="px32" src="../public/assets/logo/logo-shield-black.svg" alt="32"><figcaption>32px</figcaption></figure>
+        <figure><img class="px24" src="../public/assets/logo/logo-shield-black.svg" alt="24"><figcaption>24px</figcaption></figure>
+      </div>
+      <div class="stage checker"><img class="shield120" src="../public/assets/logo/logo-shield-black.svg" alt="Black shield transparency"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">logo-shield-white.svg</div>
+      <div class="stage on-dark ruler">
+        <figure><img class="shield120" src="../public/assets/logo/logo-shield-white.svg" alt="White shield"><figcaption>120px</figcaption></figure>
+        <figure><img class="px48" src="../public/assets/logo/logo-shield-white.svg" alt="48"><figcaption>48px</figcaption></figure>
+        <figure><img class="px32" src="../public/assets/logo/logo-shield-white.svg" alt="32"><figcaption>32px</figcaption></figure>
+        <figure><img class="px24" src="../public/assets/logo/logo-shield-white.svg" alt="24"><figcaption>24px</figcaption></figure>
+      </div>
+      <div class="stage on-orange"><img class="shield120" src="../public/assets/logo/logo-shield-white.svg" alt="White shield on orange"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>7 — Clear space and minimum sizes</h2>
+  <p class="note">Clear space is one shield-width ÷ 2 on every side — derived from the mark, so it
+     scales automatically.</p>
+  <table>
+    <tr><th>Asset</th><th>Minimum size</th><th>Clear space</th></tr>
+    <tr><td><code>logo-horizontal-*.svg</code></td><td>160px wide</td><td>0.5 × shield width, all sides</td></tr>
+    <tr><td><code>logo-stacked.svg</code></td><td>120px wide</td><td>0.5 × shield width, all sides</td></tr>
+    <tr><td><code>logo-shield-*.svg</code></td><td>24px wide</td><td>0.25 × shield width, all sides</td></tr>
+    <tr><td><code>favicon.svg</code></td><td>16px wide</td><td>none required</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>8 — Contrast constraints that shaped the mark</h2>
+  <p class="note">Measured WCAG ratios between the four approved colors. Two pairings are unusable
+     and the geometry was built to avoid them.</p>
+  <table>
+    <tr><th>Pair</th><th>Ratio</th><th>Verdict</th></tr>
+    <tr><td>Charcoal / Warm white</td><td>15.91:1</td><td class="good">Safe</td></tr>
+    <tr><td>Charcoal / Steel gray</td><td>5.66:1</td><td class="good">Safe</td></tr>
+    <tr><td>Charcoal / Safety orange</td><td>5.25:1</td><td class="good">Safe</td></tr>
+    <tr><td>Warm white / Safety orange</td><td>3.03:1</td><td class="good">Graphics only</td></tr>
+    <tr><td>Warm white / Steel gray</td><td>2.81:1</td><td class="bad">Avoid — never used</td></tr>
+    <tr><td>Steel gray / Safety orange</td><td>1.08:1</td><td class="bad">Never adjacent</td></tr>
+  </table>
+  <p class="note" style="margin-top:16px">
+    Because orange on steel gray is effectively invisible (1.08:1), the wrench is sized to sit
+    entirely inside the rotor’s charcoal centre — it never touches the steel gray ring. And
+    because steel gray on warm white fails (2.81:1), the steel gray rotor ring is always inset
+    into a charcoal disc, and the subtitle is charcoal on light backgrounds rather than gray.
+  </p>
+</section>
+
+<section>
+  <h2>9 — Incorrect use</h2>
+  <p class="note">Rendered here deliberately so the failure modes are visible, not just described.</p>
+  <div class="grid">
+    <div class="panel">
+      <div class="cap">✗ Dark lockup on a dark background</div>
+      <div class="stage on-dark"><img class="w240" src="../public/assets/logo/logo-horizontal-dark.svg" alt="Incorrect: dark on dark"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">✗ Light lockup on a light background</div>
+      <div class="stage on-light"><img class="w240" src="../public/assets/logo/logo-horizontal-light.svg" alt="Incorrect: light on light"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">✗ Stretched (aspect ratio broken)</div>
+      <div class="stage on-light"><img style="width:300px;height:50px" src="../public/assets/logo/logo-horizontal-dark.svg" alt="Incorrect: stretched"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">✗ Rotated</div>
+      <div class="stage on-light"><img class="shield80" style="transform:rotate(-14deg)" src="../public/assets/logo/logo-shield-color.svg" alt="Incorrect: rotated"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">✗ Full-colour shield below 24px</div>
+      <div class="stage on-light"><img style="width:14px" src="../public/assets/logo/logo-shield-color.svg" alt="Incorrect: too small"></div>
+    </div>
+    <div class="panel">
+      <div class="cap">✗ Recoloured outside the palette</div>
+      <div class="stage on-light" style="background:#2f7d32"><img class="shield80" src="../public/assets/logo/logo-shield-color.svg" alt="Incorrect: unapproved colour field"></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
