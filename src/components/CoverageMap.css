@@ -1,0 +1,72 @@
+.coverage {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.coverage__ground {
+  fill: var(--color-panel);
+}
+
+.coverage__grid {
+  stroke: var(--color-on-panel);
+  stroke-width: 1;
+  opacity: 0.06;
+}
+
+.coverage__reach {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+  opacity: 0.34;
+}
+
+/* Wide, soft band linking the primary areas. */
+.coverage__zone {
+  fill: none;
+  stroke: var(--color-on-panel);
+  stroke-width: 54;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.07;
+}
+
+.coverage__spine {
+  fill: none;
+  stroke: var(--color-on-panel);
+  stroke-width: 1;
+  opacity: 0.28;
+}
+
+.coverage__marker {
+  fill: var(--color-accent);
+}
+
+.coverage__label {
+  fill: var(--color-on-panel);
+  font-family: var(--font-mono);
+  /* 15 view units -> ~12px rendered at the smallest mobile panel size */
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.coverage__leader {
+  stroke: var(--color-on-panel);
+  stroke-width: 1;
+  opacity: 0.32;
+}
+
+.coverage__meta {
+  fill: var(--color-on-panel-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.coverage__north line,
+.coverage__scale line {
+  stroke: var(--color-on-panel-muted);
+  stroke-width: 1;
+}

@@ -1,0 +1,133 @@
+.request {
+  background: var(--color-panel);
+  color: var(--color-on-panel);
+  border-top: 1px solid var(--color-hairline-on-dark);
+  scroll-margin-top: var(--header-h-compact);
+}
+
+.request__inner {
+  display: grid;
+  /* Asymmetric: the form carries more weight than the pitch. */
+  grid-template-columns: 5fr 7fr;
+  align-items: start;
+  gap: var(--space-16);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-16) var(--gutter);
+}
+
+/* ---------------- left: the pitch ---------------- */
+.request__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.request__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-on-panel-muted);
+}
+
+.request__headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.25rem + 2.8vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.request__copy {
+  max-width: 46ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+}
+
+.request__actions {
+  margin-top: var(--space-2);
+}
+
+.request__facts {
+  width: 100%;
+  margin-top: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-hairline-on-dark);
+}
+
+.request__facts > div + div {
+  margin-top: var(--space-4);
+}
+
+.request__facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-on-panel-muted);
+}
+
+.request__facts dd {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-on-panel);
+}
+
+/* ---------------- right: the form ---------------- */
+.request__form {
+  width: 100%;
+  padding-left: var(--space-10);
+  border-left: 1px solid var(--color-hairline-on-dark);
+}
+
+/* ---------------- tablet / mobile ---------------- */
+@media (max-width: 1023px) {
+  .request__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    padding: var(--space-12) var(--gutter);
+  }
+
+  .request__intro {
+    gap: var(--space-3);
+  }
+
+  .request__form {
+    padding-left: 0;
+    border-left: 0;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-hairline-on-dark);
+  }
+
+  .request__actions .cta {
+    width: 100%;
+  }
+}
+
+/* ---------------- desktop: sticky pitch column ----------------
+   The form is much taller than the pitch, so the left column would otherwise
+   scroll away into empty space. `align-items: start` on the grid means the
+   sticky containing block is the grid area, so the column travels with the
+   scroll and stops exactly where the row — and therefore the section — ends.
+   It never reaches the footer or the next section.
+
+   The min-height guard keeps it static on short viewports, where a sticky
+   column taller than the screen would clip its own lower content.
+   No animation is involved, so prefers-reduced-motion needs no override. */
+@media (min-width: 1024px) and (min-height: 720px) {
+  .request__intro {
+    position: sticky;
+    /* clears the compact sticky header, plus a small breathing offset */
+    top: calc(var(--header-h-compact) + var(--space-8));
+    align-self: start;
+  }
+}

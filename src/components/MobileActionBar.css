@@ -1,0 +1,55 @@
+.actionbar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  gap: 1px;
+  background: var(--color-hairline-on-dark);
+  border-top: 1px solid var(--color-hairline-on-dark);
+  /* keep the buttons clear of the home indicator */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.actionbar__call,
+.actionbar__request {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--actionbar-h);
+  padding: var(--space-3) var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* primary — the only filled action */
+.actionbar__call {
+  flex-grow: 1.35;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* secondary */
+.actionbar__request {
+  background: var(--color-panel);
+  color: var(--color-on-panel);
+}
+
+.actionbar__call:focus-visible,
+.actionbar__request:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -4px;
+}
+
+@media (max-width: 767px) {
+  .actionbar {
+    display: flex;
+  }
+}

@@ -44,3 +44,6 @@ assets-original/
 
 # Per-developer Claude Code settings (machine-specific paths)
 .claude/settings.local.json
+
+# Vercel CLI project link (machine-specific, never commit)
+.vercel

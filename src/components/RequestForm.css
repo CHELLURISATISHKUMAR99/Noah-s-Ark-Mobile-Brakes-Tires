@@ -1,0 +1,367 @@
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+}
+
+.request-form__legend {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-on-panel-muted);
+}
+
+.request-form__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-hairline-on-dark);
+}
+
+.request-form__row:last-of-type {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.request-form__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-on-panel);
+}
+
+.request-form__req,
+.request-form__opt {
+  font-size: 0.85em;
+  letter-spacing: 0.08em;
+  /* steel on charcoal = 5.66:1 */
+  color: var(--color-on-panel-muted);
+}
+
+/* ---------------- controls ---------------- */
+.request-form__control {
+  width: 100%;
+  min-height: var(--btn-h);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-on-panel-muted);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-on-panel);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  /* renders native dropdown and autofill chrome against the dark ground */
+  color-scheme: dark;
+}
+
+textarea.request-form__control {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.request-form__control:hover {
+  border-color: var(--color-on-panel);
+}
+
+.request-form__control:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-color: var(--color-on-panel);
+}
+
+.request-form__control--invalid {
+  border-color: var(--color-accent);
+  border-width: 2px;
+}
+
+.request-form__control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.request-form__select-wrap {
+  position: relative;
+  display: block;
+}
+
+select.request-form__control {
+  appearance: none;
+  padding-right: var(--space-10);
+  /* Windows Chrome/Edge paint the dropdown popup from the select's own
+     background-color. `transparent` resolves to white there, which hid the
+     warm-white option text. An explicit charcoal is visually identical over
+     this section's charcoal ground and fixes the popup. */
+  background-color: var(--color-panel);
+}
+
+/* The popup is OS-rendered, so options need their colours stated outright —
+   inheritance alone does not reach it on Windows. */
+.request-form__control option {
+  background-color: var(--color-panel);
+  color: var(--color-on-panel);
+}
+
+/* Placeholder stays distinguishable: steel on charcoal = 5.66:1. */
+.request-form__control option[value=''] {
+  color: var(--color-on-panel-muted);
+}
+
+/* Keep the highlighted/selected row readable rather than inheriting a
+   near-invisible system pairing. */
+.request-form__control option:checked {
+  background-color: var(--color-panel);
+  color: var(--color-on-panel);
+}
+
+/* Windows High Contrast / forced colours: hand every colour back to the OS
+   so the popup uses the user's own palette instead of ours. */
+@media (forced-colors: active) {
+  select.request-form__control,
+  .request-form__control option,
+  .request-form__control option[value=''],
+  .request-form__control option:checked {
+    background-color: Canvas;
+    color: CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  select.request-form__control {
+    border-color: CanvasText;
+  }
+
+  .request-form__chevron {
+    color: CanvasText;
+    forced-color-adjust: auto;
+  }
+}
+
+.request-form__chevron {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-on-panel);
+  pointer-events: none;
+}
+
+/* ---------------- errors ---------------- */
+.request-form__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  /* orange on charcoal = 5.25:1, and the "Error:" prefix means the state is
+     never signalled by colour alone */
+  color: var(--color-accent);
+}
+
+.request-form__error svg {
+  flex: none;
+  margin-top: 0.2em;
+}
+
+.request-form__error-prefix {
+  font-weight: 700;
+}
+
+/* ---------------- actions ---------------- */
+.request-form__actions {
+  margin-top: var(--space-2);
+}
+
+/* Mirrors the approved primary-button treatment. Written here because the
+   frozen CtaButton renders an anchor, and this must be a real submit button. */
+.request-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-h);
+  padding: 0 var(--space-8);
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.request-form__submit:hover {
+  background: #d94a1c;
+  border-color: #d94a1c;
+}
+
+.request-form__submit:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.request-form__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: var(--color-accent);
+}
+
+.request-form__disclosure,
+.request-form__status {
+  max-width: 52ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: var(--color-on-panel-muted);
+}
+
+.request-form__status:empty {
+  display: none;
+}
+
+.request-form__status {
+  color: var(--color-on-panel);
+}
+
+@media (max-width: 767px) {
+  .request-form__submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .request-form__control,
+  .request-form__submit {
+    transition: none;
+  }
+}
+
+/* ---------------- desktop prepared-request result ---------------- */
+.request-form__result {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--color-accent);
+}
+
+.request-form__result:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.request-form__result-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-on-panel);
+}
+
+.request-form__result-copy {
+  margin-top: var(--space-2);
+  max-width: 52ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: var(--color-on-panel);
+}
+
+.request-form__prepared {
+  width: 100%;
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-on-panel-muted);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-on-panel);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  resize: vertical;
+  color-scheme: dark;
+}
+
+.request-form__prepared:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.request-form__result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.request-form__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-h);
+  padding: 0 var(--space-6);
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.request-form__copy:hover {
+  background: #d94a1c;
+  border-color: #d94a1c;
+}
+
+.request-form__copy:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.request-form__copy:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.request-form__copy-status {
+  margin-top: var(--space-3);
+  max-width: 52ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: var(--color-on-panel);
+}
+
+.request-form__copy-status:empty {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .request-form__result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .request-form__copy,
+  .request-form__result-actions .cta {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .request-form__copy {
+    transition: none;
+  }
+}

@@ -1,0 +1,139 @@
+.zip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 34rem;
+  margin-top: var(--space-2);
+}
+
+.zip__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.zip__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
+
+.zip__input {
+  width: 100%;
+  min-height: var(--btn-h);
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-foreground);
+  border-radius: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  letter-spacing: 0.12em;
+}
+
+.zip__input::placeholder {
+  color: var(--color-foreground);
+  opacity: 0.35;
+  letter-spacing: 0.12em;
+}
+
+.zip__input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Mirrors the approved primary-button treatment. Written here rather than
+   reusing CtaButton, which is frozen and renders an anchor, not a button. */
+.zip__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-h);
+  padding: 0 var(--space-6);
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.zip__submit:hover {
+  background: #d94a1c;
+  border-color: #d94a1c;
+}
+
+.zip__submit:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.zip__status {
+  grid-column: 1 / -1;
+  min-height: 1.5rem;
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: var(--color-foreground);
+}
+
+.zip__status:empty {
+  min-height: 0;
+}
+
+.zip__icon {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: var(--space-1);
+}
+
+.zip__status--invalid .zip__icon {
+  color: var(--color-accent);
+}
+
+.zip__prefix {
+  font-weight: 600;
+}
+
+.zip__call {
+  color: var(--color-foreground);
+  font-weight: 600;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent);
+}
+
+.zip__call:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 559px) {
+  .zip {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .zip__submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zip__submit {
+    transition: none;
+  }
+}

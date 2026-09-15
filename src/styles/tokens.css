@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Design tokens — three layers: primitive -> semantic -> component.
+   Only the semantic layer should ever be re-pointed for a theme change.
+   Palette is the approved brand palette; see docs/BRAND_ASSET_BRIEF.md.
+   ========================================================================== */
+
+:root {
+  /* ---------- Layer 1: primitive ---------- */
+  --charcoal-900: #16181a;
+  --warm-50: #f5f2ea;
+  --orange-500: #f05a28;
+  --steel-500: #8c9298;
+
+  /* spacing, 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  /* fluid display: 44px at 375px viewport -> 84px at 1440px */
+  --text-display: clamp(2.75rem, 1.55rem + 5.1vw, 5.25rem);
+
+  --leading-tight: 1.04;
+  --leading-body: 1.6;
+  --tracking-display: -0.01em;
+  --tracking-label: 0.14em;
+
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ---------- Layer 2: semantic ---------- */
+  --color-background: var(--warm-50);
+  --color-foreground: var(--charcoal-900);
+
+  --color-panel: var(--charcoal-900);
+  --color-on-panel: var(--warm-50);
+  /* steel is 5.66:1 on charcoal (passes) but only 2.81:1 on warm white —
+     it is therefore ONLY ever used on dark grounds. */
+  --color-on-panel-muted: var(--steel-500);
+
+  --color-accent: var(--orange-500);
+  /* charcoal on orange = 5.25:1. Warm white on orange is only 3.03:1,
+     so accent labels are charcoal, never white. */
+  --color-on-accent: var(--charcoal-900);
+
+  --color-hairline-on-light: rgba(22, 24, 26, 0.14);
+  --color-hairline-on-dark: rgba(245, 242, 234, 0.18);
+  --color-focus: var(--orange-500);
+
+  /* ---------- Layer 3: component ---------- */
+  --header-h: 88px;
+  --header-h-compact: 64px;
+  --actionbar-h: 68px;
+  --tap-min: 44px;
+  --btn-h: 52px;
+  --hero-min-h: 88vh;
+  --measure: 46ch;
+  --gutter: var(--space-6);
+  --page-max: 1440px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --header-h: 68px;
+    --header-h-compact: 58px;
+    --hero-min-h: auto;
+  }
+}

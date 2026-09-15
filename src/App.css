@@ -1,6 +1,30 @@
 .app {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
-  text-align: center;
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+/* Reserve room for the fixed mobile action bar so it never covers content. */
+@media (max-width: 767px) {
+  .app {
+    padding-bottom: calc(var(--actionbar-h) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-4);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }

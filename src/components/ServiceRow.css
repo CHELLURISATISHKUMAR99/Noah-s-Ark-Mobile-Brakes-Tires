@@ -1,0 +1,171 @@
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-12) 0;
+  border-top: 1px solid var(--color-hairline-on-light);
+}
+
+/* ---------------- text column ---------------- */
+.service-row__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.service-row__number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--color-foreground);
+}
+
+.service-row__rule {
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: var(--color-accent);
+  transform-origin: left center;
+}
+
+.service-row__title {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.1rem + 1.9vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+.service-row__copy {
+  max-width: var(--measure);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+.service-row__action {
+  margin-top: var(--space-2);
+}
+
+/* Charcoal text with an orange rule underneath — orange text on warm white
+   is only 3.03:1, which fails for a link at this size. */
+.service-row__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid var(--color-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-foreground);
+  transition: gap var(--dur-fast) var(--ease-out);
+}
+
+.service-row__link:hover {
+  gap: var(--space-3);
+}
+
+.service-row__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+/* ---------------- media column ---------------- */
+.service-row__media {
+  position: relative;
+  overflow: hidden;
+  /* Fixed frame ratio reserves space before the lazy image arrives. */
+  aspect-ratio: 3 / 2;
+  background: var(--color-panel);
+}
+
+.service-row__image {
+  position: absolute;
+  inset: -3% 0;
+  width: 100%;
+  height: 106%;
+  object-fit: cover;
+  /* The standalone `scale` property, not `transform: scale()`. Motion writes
+     an inline `transform` for the parallax, which a stylesheet rule can never
+     override — `scale` composes with it instead of losing to it. */
+  transition: scale var(--dur-base) var(--ease-out);
+}
+
+/* Hover scale on pointer devices only — never on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .service-row:hover .service-row__image {
+    scale: 1.03;
+  }
+}
+
+/* ---------------- alternating placement (desktop only) ---------------- */
+@media (min-width: 1024px) {
+  .service-row--reversed .service-row__text {
+    order: 2;
+  }
+
+  .service-row--reversed .service-row__media,
+  .service-row--reversed .service-row__videoframe {
+    order: 1;
+  }
+}
+
+/* ---------------- 06: charcoal band with the wheel-service loop ---------------- */
+.service-row--video {
+  margin-top: var(--space-8);
+  /* tighter than the photo rows; the 16:9 frame is shorter than 3:2 */
+  padding: var(--space-10);
+  border-top: 0;
+  background: var(--color-panel);
+  color: var(--color-on-panel);
+}
+
+.service-row--video .service-row__number {
+  color: var(--color-on-panel-muted);
+}
+
+.service-row--video .service-row__title,
+.service-row--video .service-row__copy,
+.service-row--video .service-row__link {
+  color: var(--color-on-panel);
+}
+
+/* ---------------- mobile: one column, image above text ---------------- */
+@media (max-width: 1023px) {
+  .service-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-8) 0;
+  }
+
+  .service-row__media,
+  .service-row__videoframe {
+    order: -1;
+  }
+
+  .service-row--video {
+    padding: var(--space-6) var(--space-5) var(--space-8);
+    margin-top: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-row__image,
+  .service-row__link {
+    transition: none;
+  }
+
+  .service-row:hover .service-row__image {
+    scale: 1;
+  }
+}
