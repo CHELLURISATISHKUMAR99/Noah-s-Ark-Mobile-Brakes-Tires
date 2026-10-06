@@ -2,7 +2,6 @@
   background: var(--color-panel);
   color: var(--color-on-panel);
   border-top: 1px solid var(--color-hairline-on-dark);
-  scroll-margin-top: var(--header-h-compact);
 }
 
 .request__inner {

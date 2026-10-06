@@ -109,6 +109,10 @@
 }
 
 .zip__call {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-1);
   color: var(--color-foreground);
   font-weight: 600;
   text-underline-offset: 3px;

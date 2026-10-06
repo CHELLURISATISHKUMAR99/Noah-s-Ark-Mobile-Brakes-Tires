@@ -1,8 +1,6 @@
 .services {
   background: var(--color-background);
   color: var(--color-foreground);
-  /* clears the sticky header when jumped to from the nav */
-  scroll-margin-top: var(--header-h-compact);
 }
 
 .services__inner {

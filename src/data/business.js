@@ -61,9 +61,9 @@ export const VISIBLE_NAV_LINKS = NAV_LINKS.filter((link) => link.enabled)
 
 export const HERO_IMAGE = {
   src: '/assets/images/hero-mobile-tire-service-1920.webp',
-  // Phones request a 3x slot wider than 900px, which would otherwise pull the
-  // 1920 asset (~567KB). Desktop opts into that file with a <picture> source.
-  mobileSrc: '/assets/images/hero-mobile-tire-service-900.webp',
+  // Cropped to the mobile hero frame so phones do not download the tall 900px file.
+  // Desktop opts into the full portrait with a <picture> source.
+  mobileSrc: '/assets/images/hero-mobile-lcp.webp',
   width: 1920,
   height: 3412,
   alt: 'A technician kneeling on asphalt beside a black hatchback, fitting the front wheel by hand with an impact wrench resting on the ground beside him.',

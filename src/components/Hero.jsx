@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import {
   BUSINESS,
   CALL_LABEL,
@@ -9,67 +7,36 @@ import {
 } from '../data/business'
 import { PRIMARY_AREAS } from '../data/serviceArea'
 import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
-
-const TOWN_LINE = `${PRIMARY_AREAS.map((area) => area.name).join(' · ')}, NJ`
 import CtaButton from './CtaButton'
 import './Hero.css'
 
-const EASE = [0.22, 0.61, 0.36, 1]
-
-// Controlled, one-shot entrance. Transform/opacity only, so nothing reflows.
-const panel = {
-  hidden: {},
-  shown: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-}
-
-const rise = {
-  hidden: { opacity: 0, y: 18 },
-  shown: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-}
+const TOWN_LINE = `${PRIMARY_AREAS.map((area) => area.name).join(' · ')}, NJ`
 
 function Hero() {
-  const sectionRef = useRef(null)
-  const reduceMotion = useReducedMotion()
   const smsCapable = useSmsCapable()
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  })
-
-  // Very restrained parallax. The image is 112% tall inside an overflow-hidden
-  // frame, so a 4% drift never exposes an edge.
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '4%'])
-
   return (
-    <section className="hero" ref={sectionRef} aria-labelledby="hero-heading">
+    <section className="hero" aria-labelledby="hero-heading">
       <div className="hero__grid">
-        <motion.div
-          className="hero__panel"
-          variants={panel}
-          initial={reduceMotion ? false : 'hidden'}
-          animate="shown"
-        >
+        <div className="hero__panel">
           {/* Three spans so the desktop break points are deterministic.
               They stay inline below 1024px, preserving the mobile wrap. */}
-          <motion.h1 className="hero__headline" id="hero-heading" variants={rise}>
+          <h1 className="hero__headline" id="hero-heading">
             <span className="hero__headline-line">Mobile Brake &amp;</span>{' '}
             <span className="hero__headline-line">
               Tire Service <span className="hero__em-dash">—</span>
             </span>{' '}
             <span className="hero__headline-line">Wherever You Are</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p className="hero__copy" variants={rise}>
-            We come to your home, workplace, or roadside. Call and we’ll confirm
-            availability before dispatching.
-          </motion.p>
+          <p className="hero__copy">
+            We come to your home, workplace, or the side of the road. Call first.
+            We confirm we can take the job before we head out.
+          </p>
 
-          <motion.p className="hero__towns" variants={rise}>
-            {TOWN_LINE}
-          </motion.p>
+          <p className="hero__towns">{TOWN_LINE}</p>
 
-          <motion.div className="hero__actions" variants={rise}>
+          <div className="hero__actions">
             <CtaButton
               variant="call"
               tone="dark"
@@ -91,29 +58,25 @@ function Hero() {
             >
               {textCtaLabel(smsCapable)}
             </CtaButton>
-          </motion.div>
+          </div>
 
-          <motion.p className="hero__availability" variants={rise}>
+          <p className="hero__availability">
             <span className="hero__availability-dot" aria-hidden="true" />
             {BUSINESS.hours}
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="hero__media">
           <picture>
             <source media="(min-width: 1024px)" srcSet={HERO_IMAGE.src} />
-            <motion.img
+            <img
               className="hero__image"
               src={HERO_IMAGE.mobileSrc}
-              width={HERO_IMAGE.width}
-              height={HERO_IMAGE.height}
+              width={750}
+              height={593}
               alt={HERO_IMAGE.alt}
               fetchPriority="high"
               decoding="async"
-              style={reduceMotion ? undefined : { y: imageY }}
-              initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: EASE }}
             />
           </picture>
         </div>

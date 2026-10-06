@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { useMotionValueEvent, useScroll } from 'motion/react'
 import { BUSINESS, CALL_LABEL, VISIBLE_NAV_LINKS } from '../data/business'
 import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
@@ -25,14 +24,14 @@ function Header() {
   const toggleRef = useRef(null)
   const panelRef = useRef(null)
 
-  // Motion drives the compact state; the height change itself is a CSS
-  // transition so we never animate layout from JS.
   const smsCapable = useSmsCapable()
 
-  const { scrollY } = useScroll()
-  useMotionValueEvent(scrollY, 'change', (value) => {
-    setIsCompact(value > 24)
-  })
+  useEffect(() => {
+    const onScroll = () => setIsCompact(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false)

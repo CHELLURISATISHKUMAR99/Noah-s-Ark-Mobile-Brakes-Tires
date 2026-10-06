@@ -59,7 +59,7 @@
 
 .request-form__req,
 .request-form__opt {
-  font-size: 0.85em;
+  font-size: 1em;
   letter-spacing: 0.08em;
   /* steel on charcoal = 5.66:1 */
   color: var(--color-on-panel-muted);

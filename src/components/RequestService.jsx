@@ -54,7 +54,7 @@ function RequestService() {
             >
               Call {BUSINESS.phoneDisplay}
             </CtaButton>
-            <p className="request__primary-note">Fastest way to reach us.</p>
+            <p className="request__primary-note">Call the shop directly.</p>
           </motion.div>
 
           <motion.p className="request__copy" variants={rise}>
