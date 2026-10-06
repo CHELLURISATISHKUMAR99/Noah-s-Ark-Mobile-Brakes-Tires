@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { BUSINESS, CALL_LABEL, REQUEST_LABEL, SMS_HREF } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import './MobileActionBar.css'
 
 function isTextField(node) {
@@ -13,7 +12,6 @@ function isTextField(node) {
  * is focused so the keyboard and the form controls stay usable.
  */
 function MobileActionBar() {
-  const smsCapable = useSmsCapable()
   const [fieldFocused, setFieldFocused] = useState(false)
 
   useEffect(() => {
@@ -36,10 +34,6 @@ function MobileActionBar() {
     }
   }, [])
 
-  const textLabel = smsCapable
-    ? REQUEST_LABEL
-    : 'Text — go to the request form'
-
   return (
     <div
       className={`actionbar${fieldFocused ? ' actionbar--hidden' : ''}`}
@@ -61,9 +55,8 @@ function MobileActionBar() {
       </a>
       <a
         className="actionbar__request"
-        href={resolveTextHref(SMS_HREF, smsCapable)}
-        aria-label={textLabel}
-        title={textLabel}
+        href={SMS_HREF}
+        aria-label={REQUEST_LABEL}
       >
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
           <path

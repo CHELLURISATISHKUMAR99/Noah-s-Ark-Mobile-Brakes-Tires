@@ -1,18 +1,14 @@
 import { BUSINESS, REQUEST_LABEL, SMS_HREF } from '../data/business'
 import { FOOTER_LINKS } from '../data/requestService'
 import { PRIMARY_AREAS } from '../data/serviceArea'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import './SiteFooter.css'
 
 /**
- * Verified information only. No address, email, social profiles, licences,
- * certifications, reviews, or policy links exist for this business, so none
- * are shown.
+ * Verified information only. No address, email, licence, or star rating is
+ * shown. Google reviews, when linked, live in their own section.
  */
 function SiteFooter() {
   const year = new Date().getFullYear()
-  const smsCapable = useSmsCapable()
-  const textHref = resolveTextHref(SMS_HREF, smsCapable)
 
   return (
     <footer className="footer">
@@ -26,7 +22,6 @@ function SiteFooter() {
             height="72"
           />
           <p className="footer__radius">{BUSINESS.radius}</p>
-          <p className="footer__note">{BUSINESS.availability}</p>
         </div>
 
         <div className="footer__col">
@@ -36,12 +31,10 @@ function SiteFooter() {
           </a>
           <a
             className="footer__text"
-            href={textHref}
-            aria-label={
-              smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
-            }
+            href={SMS_HREF}
+            aria-label={REQUEST_LABEL}
           >
-            {smsCapable ? `Text ${BUSINESS.phoneDisplay}` : 'Prepare a Text'}
+            Text {BUSINESS.phoneDisplay}
           </a>
           <p className="footer__hours">{BUSINESS.hours}</p>
         </div>

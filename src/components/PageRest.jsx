@@ -1,4 +1,5 @@
 import DispatchStrip from './DispatchStrip'
+import GoogleReviews from './GoogleReviews'
 import HowItWorks from './HowItWorks'
 import RequestService from './RequestService'
 import ServiceArea from './ServiceArea'
@@ -13,6 +14,7 @@ function PageRest() {
       <HowItWorks />
       <ServiceArea />
       <RequestService />
+      <GoogleReviews />
       <SiteFooter />
     </>
   )

@@ -58,8 +58,9 @@ function RequestService() {
           </motion.div>
 
           <motion.p className="request__copy" variants={rise}>
-            To text instead, complete the form. Submitting prepares a message
-            for you to send. It does not contact the shop on its own.
+            Use the form to prepare a text to {BUSINESS.phoneDisplay}. The
+            message stays here until you send it. This page does not send it
+            for you.
           </motion.p>
 
           <motion.dl className="request__facts" variants={rise}>
@@ -70,10 +71,6 @@ function RequestService() {
             <div>
               <dt>Service radius</dt>
               <dd>{BUSINESS.radius}</dd>
-            </div>
-            <div>
-              <dt>Availability</dt>
-              <dd>{BUSINESS.availability}</dd>
             </div>
           </motion.dl>
         </motion.div>

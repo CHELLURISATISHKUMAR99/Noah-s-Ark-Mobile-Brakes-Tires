@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { BUSINESS, smsHrefForService } from '../data/business'
-import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
 import ServiceVideo from './ServiceVideo'
 import './ServiceRow.css'
 
@@ -30,7 +29,6 @@ const revealImage = {
 function ServiceRow({ service, reversed }) {
   const rowRef = useRef(null)
   const reduceMotion = useReducedMotion()
-  const smsCapable = useSmsCapable()
 
   const { scrollYProgress } = useScroll({
     target: rowRef,
@@ -40,12 +38,8 @@ function ServiceRow({ service, reversed }) {
   // exposes an edge and nothing reflows.
   const imageY = useTransform(scrollYProgress, [0, 1], ['-2.5%', '2.5%'])
 
-  // Desktop cannot usefully open an sms: URI, so it goes to the on-page form
-  // instead. Same helper the header, hero and action bar use.
-  const href = resolveTextHref(smsHrefForService(service.title), smsCapable)
-  const label = smsCapable
-    ? `Text for service: ${service.title}, to ${BUSINESS.phoneDisplay}`
-    : `Prepare a text for ${service.title} — go to the request form`
+  const href = smsHrefForService(service.title)
+  const label = `Text for service: ${service.title}, to ${BUSINESS.phoneDisplay}`
   const hasVideo = Boolean(service.video)
 
   const classes = [
@@ -86,7 +80,7 @@ function ServiceRow({ service, reversed }) {
 
         <motion.p className="service-row__action" variants={rise}>
           <a className="service-row__link" href={href} aria-label={label} title={label}>
-            <span>{textCtaLabel(smsCapable)}</span>
+            <span>Text for Service</span>
             <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
               <path
                 fill="currentColor"

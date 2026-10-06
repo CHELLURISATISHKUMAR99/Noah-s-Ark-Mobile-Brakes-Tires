@@ -39,8 +39,8 @@ function ServiceArea() {
           </motion.h2>
 
           <motion.p className="area__copy" variants={rise}>
-            Enter your ZIP code to request an availability confirmation for your
-            area.
+            Enter a ZIP code. If it is one of the towns we serve, we say so.
+            Otherwise, call and we will tell you.
           </motion.p>
 
           <motion.div className="area__checker" variants={rise}>
@@ -55,7 +55,6 @@ function ServiceArea() {
               ))}
             </ul>
             <p className="area__radius">{BUSINESS.radius}</p>
-            <p className="area__note">{BUSINESS.availability}</p>
           </motion.div>
         </motion.div>
 

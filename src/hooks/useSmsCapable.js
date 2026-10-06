@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
 
-/** Where desktop visitors go instead of an sms: URI. */
-export const REQUEST_ANCHOR = '#request-service'
-
 /**
  * Best-effort guess at whether this device can hand an `sms:` URI to a real
  * messaging app.
@@ -67,16 +64,3 @@ export function useSmsCapable() {
   return capable
 }
 
-/**
- * Rewrites an `sms:` destination to the on-page request form on devices that
- * cannot usefully open one. Any other href is returned untouched.
- */
-export function resolveTextHref(href, smsCapable) {
-  if (typeof href !== 'string' || !href.startsWith('sms:')) return href
-  return smsCapable ? href : REQUEST_ANCHOR
-}
-
-/** Visible label for a text CTA. Desktop cannot open a message, so the label says what the click actually does. */
-export function textCtaLabel(smsCapable) {
-  return smsCapable ? 'Text for Service' : 'Prepare a Text'
-}

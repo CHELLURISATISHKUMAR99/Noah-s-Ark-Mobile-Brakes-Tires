@@ -9,7 +9,6 @@ export const BUSINESS = {
   coverage:
     'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway, NJ',
   radius: 'Approximately 50-mile service area',
-  availability: 'Call to confirm availability',
 }
 
 // Interim destination for "Request Service" until the form is built.
@@ -42,8 +41,8 @@ export const REQUEST_LABEL = `Request service by text message to ${BUSINESS.phon
  * is ever visible. To restore one, flip its flag back to true once the
  * matching section id is on the page.
  *
- * "Text for Service" opens the SMS composer on a phone. Desktop navigation
- * rewrites that item to "Request Service" and points it at the on-page form.
+ * "Text for Service" opens a text to the shop with a starter message.
+ * "Request Service" in the footer goes to the form.
  */
 export const NAV_LINKS = [
   { label: 'Services', href: '#services', enabled: true },
@@ -148,7 +147,7 @@ export const SERVICES = [
     number: '06',
     slug: 'rotation-roadside',
     title: 'Rotation & roadside assistance',
-    copy: 'Tire rotation and emergency roadside tire help, subject to availability.',
+    copy: 'Tire rotation and emergency roadside tire help.',
     image: null,
     // Silent, decorative loop. The adjacent copy carries the meaning, so the
     // element is aria-hidden rather than captioned.
@@ -175,13 +174,13 @@ export const HOW_IT_WORKS_STEPS = [
   },
   {
     number: '02',
-    title: 'Confirm availability',
-    copy: 'We’ll review the request, confirm the service location, and discuss availability.',
+    title: 'We set a time',
+    copy: 'We look at the job and the location, then tell you when we can come.',
   },
   {
     number: '03',
     title: 'We come to you',
-    copy: 'Mobile service is performed at your home, workplace, or roadside location when available.',
+    copy: 'The work is done at your home, workplace, or the side of the road.',
   },
 ]
 

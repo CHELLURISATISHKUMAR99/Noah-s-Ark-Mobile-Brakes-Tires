@@ -1,0 +1,57 @@
+.reviews {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  border-top: 1px solid var(--color-hairline-on-light);
+}
+
+.reviews__inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-12) var(--gutter);
+}
+
+.reviews__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.reviews__heading {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.25rem + 2.8vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+}
+
+.reviews__copy {
+  max-width: 42ch;
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+}
+
+.reviews__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  margin-top: var(--space-4);
+  color: var(--color-foreground);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-accent);
+}
+
+.reviews__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}

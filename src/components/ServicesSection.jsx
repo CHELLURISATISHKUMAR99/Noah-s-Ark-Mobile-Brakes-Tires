@@ -12,8 +12,7 @@ function ServicesSection() {
             Services
           </h2>
           <p className="services__dek">
-            On-location brake and tire work. We confirm availability before we
-            come out.
+            On-location brake and tire work.
           </p>
         </header>
 

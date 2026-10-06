@@ -1,21 +1,9 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { BUSINESS, CALL_LABEL, VISIBLE_NAV_LINKS } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import './Header.css'
 
 const FOCUSABLE = 'a[href], button:not([disabled])'
-
-function linkLabel(link, smsCapable) {
-  if (link.href.startsWith('sms:') && !smsCapable) return 'Request Service'
-  return link.label
-}
-
-function linkAria(link, smsCapable) {
-  if (!link.href.startsWith('sms:')) return link.ariaLabel
-  if (!smsCapable) return 'Request Service — go to the request form'
-  return link.ariaLabel
-}
 
 function Header() {
   const [isCompact, setIsCompact] = useState(false)
@@ -23,8 +11,6 @@ function Header() {
   const panelId = useId()
   const toggleRef = useRef(null)
   const panelRef = useRef(null)
-
-  const smsCapable = useSmsCapable()
 
   useEffect(() => {
     const onScroll = () => setIsCompact(window.scrollY > 24)
@@ -115,10 +101,10 @@ function Header() {
               <li key={link.href}>
                 <a
                   className="header__nav-link"
-                  href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={linkAria(link, smsCapable)}
+                  href={link.href}
+                  aria-label={link.ariaLabel}
                 >
-                  {linkLabel(link, smsCapable)}
+                  {link.label}
                 </a>
               </li>
             ))}
@@ -181,11 +167,11 @@ function Header() {
               <li key={link.href}>
                 <a
                   className="header__panel-link"
-                  href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={linkAria(link, smsCapable)}
+                  href={link.href}
+                  aria-label={link.ariaLabel}
                   onClick={closeMenu}
                 >
-                  {linkLabel(link, smsCapable)}
+                  {link.label}
                 </a>
               </li>
             ))}

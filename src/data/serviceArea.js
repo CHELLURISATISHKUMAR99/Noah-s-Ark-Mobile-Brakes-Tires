@@ -93,6 +93,26 @@ export function scaleBarLength(miles, unitsPerMile) {
 export const ZIP_PATTERN = /^\d{5}(-\d{4})?$/
 
 /**
+ * ZIP codes published for the five named towns. 07060 is omitted on purpose:
+ * Plainfield and North Plainfield use it, and so do Watchung and Warren.
+ */
+const SERVED_ZIPS = {
+  '07061': 'Plainfield',
+  '07062': 'Plainfield',
+  '07063': 'Plainfield',
+  '07080': 'South Plainfield',
+  '08817': 'Edison',
+  '08818': 'Edison',
+  '08820': 'Edison',
+  '08837': 'Edison',
+  '08854': 'Piscataway',
+  '08855': 'Piscataway',
+}
+
+const TOWN_LIST =
+  'Plainfield, North Plainfield, South Plainfield, Edison, and Piscataway'
+
+/**
  * Placeholder for a real coverage dataset. Deliberately returns `unknown` for
  * every ZIP — the UI must never claim a ZIP is inside or outside the area.
  */
@@ -104,27 +124,48 @@ export function checkZip(input) {
   if (!value) {
     return {
       state: 'invalid',
-      message: 'Enter a ZIP code to check availability.',
+      message: 'Enter a ZIP code.',
     }
   }
 
   if (!ZIP_PATTERN.test(value)) {
     return {
       state: 'invalid',
-      message: 'Enter a valid 5-digit US ZIP code.',
+      message: 'Enter a 5-digit US ZIP code.',
+    }
+  }
+
+  const zip5 = value.slice(0, 5)
+  const town = SERVED_ZIPS[zip5]
+  if (town) {
+    return {
+      state: 'served',
+      zip: zip5,
+      title: 'We serve this ZIP',
+      message: `${zip5} is in ${town}, one of the towns we serve. Call to schedule.`,
+    }
+  }
+
+  if (zip5 === '07060') {
+    return {
+      state: 'call',
+      zip: zip5,
+      title: 'Call us about this ZIP',
+      message:
+        'Plainfield and North Plainfield use 07060, and so do some nearby towns. Call and we will tell you if we can come to your address.',
     }
   }
 
   const coverage = COVERAGE_LOOKUP(value)
   if (coverage !== 'unknown') {
-    // Reserved for real data. Not reachable today.
-    return { state: coverage, zip: value, message: '' }
+    return { state: coverage, zip: zip5, title: '', message: '' }
   }
 
   return {
-    state: 'pending',
-    zip: value,
-    message: `Service availability for ZIP ${value} will be confirmed by dispatch.`,
+    state: 'call',
+    zip: zip5,
+    title: 'Call us about this ZIP',
+    message: `We serve ${TOWN_LIST}. Call us about ${zip5}.`,
   }
 }
 

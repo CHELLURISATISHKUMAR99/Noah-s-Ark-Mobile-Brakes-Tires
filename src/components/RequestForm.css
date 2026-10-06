@@ -319,6 +319,7 @@ select.request-form__control {
   margin-top: var(--space-4);
 }
 
+.request-form__sms,
 .request-form__copy {
   display: inline-flex;
   align-items: center;
@@ -334,6 +335,7 @@ select.request-form__control {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   touch-action: manipulation;
@@ -342,11 +344,13 @@ select.request-form__control {
     border-color var(--dur-fast) var(--ease-out);
 }
 
+.request-form__sms:hover,
 .request-form__copy:hover {
   background: #e4dfd4;
   border-color: #e4dfd4;
 }
 
+.request-form__sms:focus-visible,
 .request-form__copy:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 3px;
@@ -375,6 +379,7 @@ select.request-form__control {
     align-items: stretch;
   }
 
+  .request-form__sms,
   .request-form__copy,
   .request-form__result-actions .cta {
     width: 100%;

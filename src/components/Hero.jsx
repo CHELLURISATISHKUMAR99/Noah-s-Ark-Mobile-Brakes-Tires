@@ -6,15 +6,12 @@ import {
   SMS_HREF,
 } from '../data/business'
 import { PRIMARY_AREAS } from '../data/serviceArea'
-import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import './Hero.css'
 
 const TOWN_LINE = `${PRIMARY_AREAS.map((area) => area.name).join(' · ')}, NJ`
 
 function Hero() {
-  const smsCapable = useSmsCapable()
-
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <div className="hero__grid">
@@ -30,8 +27,7 @@ function Hero() {
           </h1>
 
           <p className="hero__copy">
-            We come to your home, workplace, or the side of the road. Call first.
-            We confirm we can take the job before we head out.
+            We come to your home, workplace, or the side of the road.
           </p>
 
           <p className="hero__towns">{TOWN_LINE}</p>
@@ -48,15 +44,10 @@ function Hero() {
             <CtaButton
               variant="request"
               tone="dark"
-              href={resolveTextHref(SMS_HREF, smsCapable)}
-              aria-label={
-                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
-              }
-              title={
-                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
-              }
+              href={SMS_HREF}
+              aria-label={REQUEST_LABEL}
             >
-              {textCtaLabel(smsCapable)}
+              Text for Service
             </CtaButton>
           </div>
 
