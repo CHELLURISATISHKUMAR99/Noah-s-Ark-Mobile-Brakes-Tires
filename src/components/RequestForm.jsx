@@ -117,8 +117,21 @@ function RequestForm({ idPrefix }) {
 
   const errorCount = Object.keys(errors).length
 
+  const noticeId = `${idPrefix}-notice`
+
   return (
     <form className="request-form" onSubmit={onSubmit} noValidate>
+      <div className="request-form__notice" id={noticeId}>
+        <p className="request-form__notice-title">
+          This prepares a text. It does not send it.
+        </p>
+        <p className="request-form__notice-copy">
+          {smsCapable
+            ? 'Your messaging app opens with the message ready. You still have to press send. Call if you need a visit confirmed now.'
+            : 'The message appears on this page so you can copy it, then text or call it in yourself. Nothing is sent from this website.'}
+        </p>
+      </div>
+
       <p className="request-form__legend">
         All fields marked <span className="request-form__req">required</span>{' '}
         must be completed.
@@ -135,6 +148,8 @@ function RequestForm({ idPrefix }) {
           ref: (node) => {
             fieldRefs.current[field.name] = node
           },
+          required: field.required || undefined,
+          'aria-required': field.required || undefined,
           'aria-invalid': invalid || undefined,
           'aria-describedby': invalid ? errorId(field.name) : undefined,
           className: `request-form__control${invalid ? ' request-form__control--invalid' : ''}`,
@@ -203,15 +218,17 @@ function RequestForm({ idPrefix }) {
       })}
 
       <div className="request-form__actions">
-        <button className="request-form__submit" type="submit">
+        <button
+          className="request-form__submit"
+          type="submit"
+          aria-describedby={noticeId}
+        >
           Prepare Service Text
         </button>
       </div>
 
       <p className="request-form__disclosure">
-        {smsCapable
-          ? 'Submitting opens your messaging app. Your request is not sent until you send the message. Message and data rates may apply.'
-          : 'Submitting prepares your request on this page for you to copy. Your request is not sent until you call or text it yourself. Message and data rates may apply.'}
+        Message and data rates may apply when you send the text.
       </p>
 
       {prepared && (
@@ -219,9 +236,9 @@ function RequestForm({ idPrefix }) {
           className="request-form__result"
           ref={resultRef}
           tabIndex={-1}
-          aria-labelledby="prepared-heading"
+          aria-labelledby={`${idPrefix}-prepared-heading`}
         >
-          <h3 className="request-form__result-title" id="prepared-heading">
+          <h3 className="request-form__result-title" id={`${idPrefix}-prepared-heading`}>
             Your prepared request
           </h3>
           <p className="request-form__result-copy">{COPY_PROMPT}</p>

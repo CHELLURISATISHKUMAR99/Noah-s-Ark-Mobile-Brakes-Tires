@@ -1,6 +1,7 @@
-import { BUSINESS } from '../data/business'
+import { BUSINESS, REQUEST_LABEL, SMS_HREF } from '../data/business'
 import { FOOTER_LINKS } from '../data/requestService'
 import { PRIMARY_AREAS } from '../data/serviceArea'
+import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import './SiteFooter.css'
 
 /**
@@ -10,6 +11,8 @@ import './SiteFooter.css'
  */
 function SiteFooter() {
   const year = new Date().getFullYear()
+  const smsCapable = useSmsCapable()
+  const textHref = resolveTextHref(SMS_HREF, smsCapable)
 
   return (
     <footer className="footer">
@@ -29,7 +32,16 @@ function SiteFooter() {
         <div className="footer__col">
           <h2 className="footer__title">Contact</h2>
           <a className="footer__phone" href={BUSINESS.phoneHref}>
-            {BUSINESS.phoneDisplay}
+            Call {BUSINESS.phoneDisplay}
+          </a>
+          <a
+            className="footer__text"
+            href={textHref}
+            aria-label={
+              smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
+            }
+          >
+            {smsCapable ? `Text ${BUSINESS.phoneDisplay}` : 'Prepare a Text'}
           </a>
           <p className="footer__hours">{BUSINESS.hours}</p>
         </div>
@@ -41,6 +53,7 @@ function SiteFooter() {
               <li key={area.name}>{area.name}</li>
             ))}
           </ul>
+          <p className="footer__hours">New Jersey</p>
         </div>
 
         <nav className="footer__col" aria-label="Footer">

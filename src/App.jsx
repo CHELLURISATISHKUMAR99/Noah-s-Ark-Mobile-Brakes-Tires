@@ -1,3 +1,4 @@
+import Analytics from './components/Analytics'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import DispatchStrip from './components/DispatchStrip'
@@ -12,6 +13,7 @@ import './App.css'
 function App() {
   return (
     <div className="app">
+      <Analytics />
       <a className="skip-link" href="#main">
         Skip to main content
       </a>

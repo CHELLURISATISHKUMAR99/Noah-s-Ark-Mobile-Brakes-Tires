@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { BUSINESS, smsHrefForService } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
+import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
 import ServiceVideo from './ServiceVideo'
 import './ServiceRow.css'
 
@@ -45,7 +45,7 @@ function ServiceRow({ service, reversed }) {
   const href = resolveTextHref(smsHrefForService(service.title), smsCapable)
   const label = smsCapable
     ? `Text for service: ${service.title}, to ${BUSINESS.phoneDisplay}`
-    : `Text for Service: ${service.title} — go to the request form`
+    : `Prepare a text for ${service.title} — go to the request form`
   const hasVideo = Boolean(service.video)
 
   const classes = [
@@ -86,7 +86,7 @@ function ServiceRow({ service, reversed }) {
 
         <motion.p className="service-row__action" variants={rise}>
           <a className="service-row__link" href={href} aria-label={label} title={label}>
-            <span>Text for Service</span>
+            <span>{textCtaLabel(smsCapable)}</span>
             <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
               <path
                 fill="currentColor"
@@ -105,20 +105,27 @@ function ServiceRow({ service, reversed }) {
 
       {service.image && (
         <motion.div className="service-row__media" variants={revealImage}>
-          <motion.img
-            className="service-row__image"
-            src={service.image.src}
-            width={service.image.width}
-            height={service.image.height}
-            alt={service.image.alt}
-            loading="lazy"
-            decoding="async"
-            style={{
-              objectPosition: service.image.objectPosition,
-              ...(service.image.filter ? { filter: service.image.filter } : {}),
-              ...(reduceMotion ? {} : { y: imageY }),
-            }}
-          />
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              srcSet={service.image.src.replace('-900.webp', '-1920.webp')}
+            />
+            <motion.img
+              className="service-row__image"
+              src={service.image.src}
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              width={service.image.width}
+              height={service.image.height}
+              alt={service.image.alt}
+              loading="lazy"
+              decoding="async"
+              style={{
+                objectPosition: service.image.objectPosition,
+                ...(service.image.filter ? { filter: service.image.filter } : {}),
+                ...(reduceMotion ? {} : { y: imageY }),
+              }}
+            />
+          </picture>
         </motion.div>
       )}
     </motion.li>

@@ -48,7 +48,7 @@ function ServiceArea() {
           </motion.div>
 
           <motion.div className="area__facts" variants={rise}>
-            <h3 className="area__facts-title">Primary areas</h3>
+            <h3 className="area__facts-title">Primary areas in New Jersey</h3>
             <ul className="area__areas">
               {PRIMARY_AREAS.map((area) => (
                 <li key={area.name}>{area.name}</li>

@@ -13,8 +13,10 @@
 
 .services__head {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: var(--space-5);
+  column-gap: var(--space-5);
+  row-gap: var(--space-3);
   padding-bottom: var(--space-8);
 }
 
@@ -35,6 +37,13 @@
   line-height: 1.05;
   letter-spacing: var(--tracking-display);
   text-transform: uppercase;
+}
+
+.services__dek {
+  flex: 1 0 100%;
+  max-width: 42rem;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
 }
 
 .services__list {

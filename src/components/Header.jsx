@@ -7,6 +7,17 @@ import './Header.css'
 
 const FOCUSABLE = 'a[href], button:not([disabled])'
 
+function linkLabel(link, smsCapable) {
+  if (link.href.startsWith('sms:') && !smsCapable) return 'Request Service'
+  return link.label
+}
+
+function linkAria(link, smsCapable) {
+  if (!link.href.startsWith('sms:')) return link.ariaLabel
+  if (!smsCapable) return 'Request Service — go to the request form'
+  return link.ariaLabel
+}
+
 function Header() {
   const [isCompact, setIsCompact] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -106,13 +117,9 @@ function Header() {
                 <a
                   className="header__nav-link"
                   href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={
-                    link.ariaLabel && !smsCapable && link.href.startsWith('sms:')
-                      ? `${link.label} — go to the request form`
-                      : link.ariaLabel
-                  }
+                  aria-label={linkAria(link, smsCapable)}
                 >
-                  {link.label}
+                  {linkLabel(link, smsCapable)}
                 </a>
               </li>
             ))}
@@ -176,14 +183,10 @@ function Header() {
                 <a
                   className="header__panel-link"
                   href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={
-                    link.ariaLabel && !smsCapable && link.href.startsWith('sms:')
-                      ? `${link.label} — go to the request form`
-                      : link.ariaLabel
-                  }
+                  aria-label={linkAria(link, smsCapable)}
                   onClick={closeMenu}
                 >
-                  {link.label}
+                  {linkLabel(link, smsCapable)}
                 </a>
               </li>
             ))}

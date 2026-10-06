@@ -5,6 +5,29 @@
   width: 100%;
 }
 
+.request-form__notice {
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-accent);
+  background: rgba(245, 242, 234, 0.07);
+  color: var(--color-on-panel);
+}
+
+.request-form__notice-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.request-form__notice-copy {
+  margin-top: var(--space-2);
+  max-width: 58ch;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
 .request-form__legend {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -174,18 +197,19 @@ select.request-form__control {
   margin-top: var(--space-2);
 }
 
-/* Mirrors the approved primary-button treatment. Written here because the
-   frozen CtaButton renders an anchor, and this must be a real submit button. */
+/* Light fill so the orange Call button stays the primary action.
+   Written here because CtaButton renders an anchor, and this must submit. */
 .request-form__submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   min-height: var(--btn-h);
   padding: 0 var(--space-8);
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-on-panel);
   border-radius: 0;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-on-panel);
+  color: var(--color-panel);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
@@ -193,14 +217,15 @@ select.request-form__control {
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
+  touch-action: manipulation;
   transition:
     background-color var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out);
 }
 
 .request-form__submit:hover {
-  background: #d94a1c;
-  border-color: #d94a1c;
+  background: #e4dfd4;
+  border-color: #e4dfd4;
 }
 
 .request-form__submit:focus-visible {
@@ -211,7 +236,7 @@ select.request-form__control {
 .request-form__submit:disabled {
   opacity: 0.55;
   cursor: not-allowed;
-  background: var(--color-accent);
+  background: var(--color-on-panel);
 }
 
 .request-form__disclosure,
@@ -230,12 +255,6 @@ select.request-form__control {
   color: var(--color-on-panel);
 }
 
-@media (max-width: 767px) {
-  .request-form__submit {
-    width: 100%;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .request-form__control,
   .request-form__submit {
@@ -248,6 +267,7 @@ select.request-form__control {
   margin-top: var(--space-6);
   padding-top: var(--space-6);
   border-top: 2px solid var(--color-accent);
+  scroll-margin-bottom: calc(var(--actionbar-h) + var(--space-6));
 }
 
 .request-form__result:focus-visible {
@@ -305,10 +325,10 @@ select.request-form__control {
   justify-content: center;
   min-height: var(--btn-h);
   padding: 0 var(--space-6);
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-on-panel);
   border-radius: 0;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-on-panel);
+  color: var(--color-panel);
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 700;
@@ -316,14 +336,15 @@ select.request-form__control {
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
+  touch-action: manipulation;
   transition:
     background-color var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out);
 }
 
 .request-form__copy:hover {
-  background: #d94a1c;
-  border-color: #d94a1c;
+  background: #e4dfd4;
+  border-color: #e4dfd4;
 }
 
 .request-form__copy:focus-visible {

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noah-s-ark-mobile-brakes-tires.vercel.app/sitemap.xml

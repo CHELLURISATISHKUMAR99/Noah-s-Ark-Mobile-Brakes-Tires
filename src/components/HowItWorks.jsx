@@ -8,7 +8,7 @@ import {
   REQUEST_LABEL,
   SMS_HREF,
 } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
+import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import ProcessStep from './ProcessStep'
 import './HowItWorks.css'
@@ -127,17 +127,13 @@ function HowItWorks() {
               tone="light"
               href={resolveTextHref(SMS_HREF, smsCapable)}
               aria-label={
-                smsCapable
-                  ? REQUEST_LABEL
-                  : 'Text for Service — go to the request form'
+                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
               }
               title={
-                smsCapable
-                  ? REQUEST_LABEL
-                  : 'Text for Service — go to the request form'
+                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
               }
             >
-              Text for Service
+              {textCtaLabel(smsCapable)}
             </CtaButton>
           </motion.div>
         </motion.div>

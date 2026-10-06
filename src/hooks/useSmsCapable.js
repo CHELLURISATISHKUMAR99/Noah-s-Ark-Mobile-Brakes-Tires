@@ -75,3 +75,8 @@ export function resolveTextHref(href, smsCapable) {
   if (typeof href !== 'string' || !href.startsWith('sms:')) return href
   return smsCapable ? href : REQUEST_ANCHOR
 }
+
+/** Visible label for a text CTA. Desktop cannot open a message, so the label says what the click actually does. */
+export function textCtaLabel(smsCapable) {
+  return smsCapable ? 'Text for Service' : 'Prepare a Text'
+}

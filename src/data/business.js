@@ -6,7 +6,7 @@ export const BUSINESS = {
   phoneHref: 'tel:+19082792100',
   hours: 'Monday–Saturday · 8 AM–7 PM',
   coverage:
-    'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway',
+    'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway, NJ',
   radius: 'Approximately 50-mile service area',
   availability: 'Call to confirm availability',
 }
@@ -41,9 +41,8 @@ export const REQUEST_LABEL = `Request service by text message to ${BUSINESS.phon
  * is ever visible. To restore one, flip its flag back to true once the
  * matching section id is on the page.
  *
- * Note: the label "Request Service" is deliberately reserved for the future
- * on-site form. Anything that opens the SMS composer says "Text ..." instead,
- * so the label always matches what actually happens.
+ * "Text for Service" opens the SMS composer on a phone. Desktop navigation
+ * rewrites that item to "Request Service" and points it at the on-page form.
  */
 export const NAV_LINKS = [
   { label: 'Services', href: '#services', enabled: true },
@@ -62,8 +61,9 @@ export const VISIBLE_NAV_LINKS = NAV_LINKS.filter((link) => link.enabled)
 
 export const HERO_IMAGE = {
   src: '/assets/images/hero-mobile-tire-service-1920.webp',
-  srcSet:
-    '/assets/images/hero-mobile-tire-service-900.webp 900w, /assets/images/hero-mobile-tire-service-1920.webp 1920w',
+  // Phones request a 3x slot wider than 900px, which would otherwise pull the
+  // 1920 asset (~567KB). Desktop opts into that file with a <picture> source.
+  mobileSrc: '/assets/images/hero-mobile-tire-service-900.webp',
   width: 1920,
   height: 3412,
   alt: 'A technician kneeling on asphalt beside a black hatchback, fitting the front wheel by hand with an impact wrench resting on the ground beside him.',

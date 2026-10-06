@@ -89,6 +89,10 @@
   background: var(--color-panel);
 }
 
+.service-row__media picture {
+  display: contents;
+}
+
 .service-row__image {
   position: absolute;
   inset: -3% 0;

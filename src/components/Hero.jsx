@@ -7,7 +7,10 @@ import {
   REQUEST_LABEL,
   SMS_HREF,
 } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
+import { PRIMARY_AREAS } from '../data/serviceArea'
+import { resolveTextHref, textCtaLabel, useSmsCapable } from '../hooks/useSmsCapable'
+
+const TOWN_LINE = `${PRIMARY_AREAS.map((area) => area.name).join(' · ')}, NJ`
 import CtaButton from './CtaButton'
 import './Hero.css'
 
@@ -58,8 +61,12 @@ function Hero() {
           </motion.h1>
 
           <motion.p className="hero__copy" variants={rise}>
-            Professional brake and tire service brought to your home, workplace,
-            or roadside location.
+            We come to your home, workplace, or roadside. Call and we’ll confirm
+            availability before dispatching.
+          </motion.p>
+
+          <motion.p className="hero__towns" variants={rise}>
+            {TOWN_LINE}
           </motion.p>
 
           <motion.div className="hero__actions" variants={rise}>
@@ -76,13 +83,13 @@ function Hero() {
               tone="dark"
               href={resolveTextHref(SMS_HREF, smsCapable)}
               aria-label={
-                smsCapable ? REQUEST_LABEL : 'Text for Service — go to the request form'
+                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
               }
               title={
-                smsCapable ? REQUEST_LABEL : 'Text for Service — go to the request form'
+                smsCapable ? REQUEST_LABEL : 'Prepare a text — go to the request form'
               }
             >
-              Text for Service
+              {textCtaLabel(smsCapable)}
             </CtaButton>
           </motion.div>
 
@@ -93,21 +100,22 @@ function Hero() {
         </motion.div>
 
         <div className="hero__media">
-          <motion.img
-            className="hero__image"
-            src={HERO_IMAGE.src}
-            srcSet={HERO_IMAGE.srcSet}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            width={HERO_IMAGE.width}
-            height={HERO_IMAGE.height}
-            alt={HERO_IMAGE.alt}
-            fetchPriority="high"
-            decoding="async"
-            style={reduceMotion ? undefined : { y: imageY }}
-            initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
-          />
+          <picture>
+            <source media="(min-width: 1024px)" srcSet={HERO_IMAGE.src} />
+            <motion.img
+              className="hero__image"
+              src={HERO_IMAGE.mobileSrc}
+              width={HERO_IMAGE.width}
+              height={HERO_IMAGE.height}
+              alt={HERO_IMAGE.alt}
+              fetchPriority="high"
+              decoding="async"
+              style={reduceMotion ? undefined : { y: imageY }}
+              initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: EASE }}
+            />
+          </picture>
         </div>
       </div>
     </section>

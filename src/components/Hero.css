@@ -65,6 +65,19 @@
   color: var(--color-on-panel);
 }
 
+.hero__towns {
+  max-width: 46rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.55;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-on-panel);
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -95,6 +108,10 @@
   position: relative;
   overflow: hidden;
   background: var(--color-panel);
+}
+
+.hero__media picture {
+  display: contents;
 }
 
 .hero__image {
@@ -147,9 +164,9 @@
   /* Image first on small screens, panel below. */
   .hero__media {
     order: -1;
-    height: 58vh;
-    min-height: 320px;
-    max-height: 520px;
+    height: 40vh;
+    min-height: 220px;
+    max-height: 400px;
   }
 
   .hero__panel {
@@ -169,8 +186,15 @@
 
 @media (max-width: 767px) {
   .hero__media {
-    height: 52vh;
-    min-height: 280px;
+    /* Leave the headline and call button on the first screen. */
+    height: 34vh;
+    min-height: 190px;
+    max-height: 260px;
+  }
+
+  .hero__panel {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-10);
   }
 }
 
