@@ -2,6 +2,7 @@
 
 export const BUSINESS = {
   name: 'Noah’s Ark Mobile Brakes & Tires',
+  siteUrl: 'https://noahsarkmobilebrakes.com/',
   phoneDisplay: '(908) 279-2100',
   phoneHref: 'tel:+19082792100',
   hours: 'Monday–Saturday · 8 AM–7 PM',

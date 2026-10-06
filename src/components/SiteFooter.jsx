@@ -72,7 +72,12 @@ function SiteFooter() {
 
       <div className="footer__bar">
         <p className="footer__copyright">
-          &copy; {year} {BUSINESS.name}
+          <span>
+            &copy; {year} {BUSINESS.name}
+          </span>
+          <a className="footer__site" href={BUSINESS.siteUrl}>
+            noahsarkmobilebrakes.com
+          </a>
         </p>
       </div>
     </footer>
