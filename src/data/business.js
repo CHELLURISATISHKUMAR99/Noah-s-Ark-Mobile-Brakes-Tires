@@ -9,6 +9,13 @@ export const BUSINESS = {
   coverage:
     'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway, NJ',
   radius: 'Approximately 50-mile service area',
+  // Confirmed Google Business Profile. The count and rating are the public
+  // totals only — do not add review quotes.
+  googleReviews: {
+    rating: '4.8',
+    count: 5,
+    url: 'https://share.google/fiwxfjsYPLUMgXSyt',
+  },
 }
 
 // Interim destination for "Request Service" until the form is built.

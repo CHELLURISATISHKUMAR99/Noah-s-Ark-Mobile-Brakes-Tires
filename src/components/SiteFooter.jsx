@@ -4,8 +4,8 @@ import { PRIMARY_AREAS } from '../data/serviceArea'
 import './SiteFooter.css'
 
 /**
- * Verified information only. No address, email, licence, or star rating is
- * shown. Google reviews, when linked, live in their own section.
+ * Verified information only. No address, email, or licence is shown.
+ * The Google rating in the reviews section is the public total only.
  */
 function SiteFooter() {
   const year = new Date().getFullYear()
