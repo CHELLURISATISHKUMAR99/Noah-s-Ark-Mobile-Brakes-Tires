@@ -39,8 +39,8 @@ function ServiceArea() {
           </motion.h2>
 
           <motion.p className="area__copy" variants={rise}>
-            Enter a ZIP code. If it is one of the towns we serve, we say so.
-            Otherwise, call and we will tell you.
+            Enter a ZIP code. We will say if it is one of the five towns, a
+            nearby town, or outside that area.
           </motion.p>
 
           <motion.div className="area__checker" variants={rise}>

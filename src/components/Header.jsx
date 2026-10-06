@@ -74,22 +74,18 @@ function Header() {
   return (
     <header className={`header${isCompact ? ' header--compact' : ''}`}>
       <div className="header__inner">
-        <a
-          className="header__brand"
-          href="/"
-          aria-label={`${BUSINESS.name} — home`}
-        >
+        <a className="header__brand" href="/">
           <img
             className="header__logo header__logo--full"
             src="/assets/logo/logo-horizontal-dark.svg"
-            alt=""
+            alt={BUSINESS.name}
             width="284"
             height="72"
           />
           <img
             className="header__logo header__logo--mark"
             src="/assets/logo/logo-shield-color.svg"
-            alt=""
+            alt={BUSINESS.name}
             width="64"
             height="72"
           />

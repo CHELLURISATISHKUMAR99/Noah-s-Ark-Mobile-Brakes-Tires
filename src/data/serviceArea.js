@@ -93,10 +93,11 @@ export function scaleBarLength(miles, unitsPerMile) {
 export const ZIP_PATTERN = /^\d{5}(-\d{4})?$/
 
 /**
- * ZIP codes published for the five named towns. 07060 is omitted on purpose:
- * Plainfield and North Plainfield use it, and so do Watchung and Warren.
+ * Published ZIP codes for the five named towns. 07060 is included because
+ * Plainfield and North Plainfield use it; a few nearby towns share it too.
  */
 const SERVED_ZIPS = {
+  '07060': 'Plainfield and North Plainfield',
   '07061': 'Plainfield',
   '07062': 'Plainfield',
   '07063': 'Plainfield',
@@ -109,14 +110,30 @@ const SERVED_ZIPS = {
   '08855': 'Piscataway',
 }
 
+/** Towns that border the five. These are nearby, not the primary list. */
+const NEARBY_ZIPS = {
+  '07023': 'Fanwood',
+  '07059': 'Warren',
+  '07065': 'Rahway',
+  '07066': 'Clark',
+  '07067': 'Colonia',
+  '07069': 'Watchung',
+  '07076': 'Scotch Plains',
+  '07095': 'Woodbridge',
+  '08805': 'Bound Brook',
+  '08812': 'Dunellen',
+  '08830': 'Iselin',
+  '08840': 'Metuchen',
+  '08846': 'Middlesex',
+  '08873': 'Somerset',
+  '08901': 'New Brunswick',
+  '08902': 'North Brunswick',
+  '08904': 'Highland Park',
+  '07008': 'Carteret',
+}
+
 const TOWN_LIST =
   'Plainfield, North Plainfield, South Plainfield, Edison, and Piscataway'
-
-/**
- * Placeholder for a real coverage dataset. Deliberately returns `unknown` for
- * every ZIP — the UI must never claim a ZIP is inside or outside the area.
- */
-const COVERAGE_LOOKUP = () => 'unknown'
 
 export function checkZip(input) {
   const value = String(input ?? '').trim()
@@ -141,31 +158,26 @@ export function checkZip(input) {
     return {
       state: 'served',
       zip: zip5,
-      title: 'We serve this ZIP',
-      message: `${zip5} is in ${town}, one of the towns we serve. Call to schedule.`,
+      title: 'In the area',
+      message: `${zip5} is in ${town}. We come there. Call to schedule.`,
     }
   }
 
-  if (zip5 === '07060') {
+  const nearby = NEARBY_ZIPS[zip5]
+  if (nearby) {
     return {
-      state: 'call',
+      state: 'nearby',
       zip: zip5,
-      title: 'Call us about this ZIP',
-      message:
-        'Plainfield and North Plainfield use 07060, and so do some nearby towns. Call and we will tell you if we can come to your address.',
+      title: 'Nearby',
+      message: `${zip5} is in ${nearby}, next to the towns we serve. Call and we will schedule if we can come that day.`,
     }
-  }
-
-  const coverage = COVERAGE_LOOKUP(value)
-  if (coverage !== 'unknown') {
-    return { state: coverage, zip: zip5, title: '', message: '' }
   }
 
   return {
-    state: 'call',
+    state: 'outside',
     zip: zip5,
-    title: 'Call us about this ZIP',
-    message: `We serve ${TOWN_LIST}. Call us about ${zip5}.`,
+    title: 'Outside this area',
+    message: `${zip5} is outside ${TOWN_LIST}. Call if you are close and we will tell you.`,
   }
 }
 

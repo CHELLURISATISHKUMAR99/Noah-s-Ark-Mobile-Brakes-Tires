@@ -1,5 +1,7 @@
 # Asset Sources & Attribution
 
+The photographs and the impact-wrench video are licensed stock from Pexels and Unsplash. They are not photos of Noah’s Ark trucks, staff, or customers. The logo files are the shop’s own brand artwork.
+
 Approved website asset selection. Every file listed here was downloaded from the
 provider's own media endpoint and verified by file signature (JPEG `ffd8`, ISO Media / WebM
 container). No HTML page was ever saved and renamed as media. No asset was substituted.
@@ -148,12 +150,12 @@ MP4s use `+faststart` (moov atom at the front) for progressive streaming.
 
 | File | Codec | Dimensions | Size | Role |
 | --- | --- | --- | --- | --- |
-| `public/assets/video/impact-wrench-wheel-1080.webm` | VP9 | 1920 × 1080 | 739.1 KB | Preferred source (smallest) |
-| `public/assets/video/impact-wrench-wheel-1080.mp4` | H.264 High | 1920 × 1080 | 1.19 MB | Universal fallback |
-| `public/assets/video/impact-wrench-wheel-720.mp4` | H.264 High | 1280 × 720 | 486.6 KB | Lightweight / mobile |
+| `public/assets/video/impact-wrench-wheel-1080.webm` | VP9 | 1920 × 1080 | 443 KB | Preferred source (smallest) |
+| `public/assets/video/impact-wrench-wheel-1080.mp4` | H.264 High | 1920 × 1080 | 747 KB | Universal fallback |
+| `public/assets/video/impact-wrench-wheel-720.mp4` | H.264 High | 1280 × 720 | 370 KB | Lightweight / mobile |
 | `public/assets/video/impact-wrench-wheel-poster.webp` | WebP | 1920 × 1080 | 42.1 KB | Poster frame (extracted at t=2s) |
 
-Total: 24.70 MB original → 1.19 MB for the primary web MP4 (≈95% reduction).
+Total: 24.70 MB original → 747 KB for the primary web MP4.
 
 ---
 
