@@ -35,8 +35,9 @@ function accentColor() {
 }
 
 /**
- * Real map of the five primary towns. Tiles are CARTO's dark basemap, which
- * is rendered from OpenStreetMap data and needs no API key.
+ * Real map of the five primary towns. Tiles are the public OpenStreetMap
+ * raster tiles, which need no API key. A CSS filter on the tile images
+ * darkens them to match the panel; markers and the ring are not filtered.
  *
  * The ring is centered on South Plainfield and sized to hold the five town
  * centers. It is not the published 50-mile service area — that sentence stays
@@ -64,15 +65,12 @@ export function mountServiceMap(container) {
     zoomControl: true,
   })
 
-  L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    {
-      subdomains: 'abcd',
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" rel="noopener noreferrer">CARTO</a>',
-    },
-  ).addTo(map)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    subdomains: 'abc',
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> contributors',
+  }).addTo(map)
 
   const circle = L.circle(center, {
     radius: radiusMeters,
@@ -112,11 +110,17 @@ export function mountServiceMap(container) {
     .scale({ imperial: true, metric: false, position: 'bottomleft' })
     .addTo(map)
 
+  const townBounds = L.latLngBounds(
+    PRIMARY_AREAS.map((area) => [area.lat, area.lon]),
+  )
+
   const fit = () => {
     map.invalidateSize({ animate: false, pan: false })
     if (container.clientHeight < 200) return false
-    map.fitBounds(circle.getBounds(), {
-      padding: [28, 28],
+    // Frame the five towns, not the whole ring, so street names stay readable.
+    map.fitBounds(townBounds, {
+      padding: [40, 22],
+      maxZoom: 12,
       animate: false,
     })
     return true

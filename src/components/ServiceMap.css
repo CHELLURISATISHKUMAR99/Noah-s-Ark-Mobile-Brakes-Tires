@@ -50,6 +50,12 @@
   max-height: none !important;
 }
 
+/* Darken the keyless OSM tiles only. Markers, the ring, and the credit sit
+   in other panes, so they keep their own colors. */
+.service-map .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.95);
+}
+
 .service-map .service-map__pin {
   background: var(--color-accent);
   border: 0;
