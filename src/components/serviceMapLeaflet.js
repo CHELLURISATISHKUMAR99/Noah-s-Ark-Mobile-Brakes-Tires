@@ -112,16 +112,27 @@ export function mountServiceMap(container) {
     .scale({ imperial: true, metric: false, position: 'bottomleft' })
     .addTo(map)
 
-  map.fitBounds(circle.getBounds(), {
-    padding: [28, 28],
-    animate: false,
-  })
+  const fit = () => {
+    map.invalidateSize({ animate: false, pan: false })
+    if (container.clientHeight < 200) return false
+    map.fitBounds(circle.getBounds(), {
+      padding: [28, 28],
+      animate: false,
+    })
+    return true
+  }
+
+  fit()
 
   container.setAttribute('role', 'region')
   container.setAttribute('aria-label', MAP_LABEL)
   container.setAttribute('title', MAP_LABEL)
 
-  const onResize = () => map.invalidateSize()
+  let fitted = container.clientHeight >= 200
+  const onResize = () => {
+    map.invalidateSize({ animate: false, pan: false })
+    if (!fitted) fitted = fit()
+  }
   const resize = new ResizeObserver(onResize)
   resize.observe(container)
   requestAnimationFrame(onResize)
