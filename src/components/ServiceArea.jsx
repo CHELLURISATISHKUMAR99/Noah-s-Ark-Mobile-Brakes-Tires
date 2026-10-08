@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { BUSINESS } from '../data/business'
 import { PRIMARY_AREAS } from '../data/serviceArea'
-import CoverageMap from './CoverageMap'
+import ServiceMap from './ServiceMap'
 import ZipChecker from './ZipChecker'
 import './ServiceArea.css'
 
@@ -59,7 +59,15 @@ function ServiceArea() {
         </motion.div>
 
         <div className="area__map">
-          <CoverageMap />
+          <ServiceMap />
+          <a
+            className="area__map-link"
+            href={BUSINESS.googleReviews.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Google Maps
+          </a>
         </div>
       </div>
     </section>

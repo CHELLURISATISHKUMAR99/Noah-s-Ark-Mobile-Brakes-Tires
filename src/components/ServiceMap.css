@@ -1,0 +1,124 @@
+.service-map {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.service-map__canvas {
+  width: 100%;
+  height: clamp(320px, 48vw, 420px);
+  background: var(--color-panel);
+  overflow: hidden;
+}
+
+.service-map__canvas:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.service-map__pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: var(--space-4);
+  background: var(--color-panel);
+  color: var(--color-on-panel);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-align: center;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Global img/svg rules would squash Leaflet tiles and the radius ring. */
+.service-map .leaflet-container {
+  width: 100%;
+  /* Leaflet panes are absolutely positioned, so a percentage height collapses. */
+  height: clamp(320px, 48vw, 420px);
+  background: var(--color-panel);
+  font-family: var(--font-body);
+}
+
+.service-map .leaflet-container img,
+.service-map .leaflet-container svg {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Darken the keyless OSM tiles only. Markers, the ring, and the credit sit
+   in other panes, so they keep their own colors. */
+.service-map .leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.95);
+}
+
+.service-map .service-map__pin {
+  background: var(--color-accent);
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(22, 24, 26, 0.7);
+}
+
+.service-map .leaflet-tooltip.service-map__label {
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 0;
+  background: rgba(22, 24, 26, 0.88);
+  box-shadow: none;
+  color: var(--color-on-panel);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.service-map .leaflet-tooltip.service-map__label::before {
+  display: none;
+}
+
+.service-map .leaflet-control-attribution {
+  /* Leave the bottom-left corner free for the mile scale. */
+  max-width: calc(100% - 84px);
+  margin: 0;
+  padding: 2px 6px;
+  background: rgba(245, 242, 234, 0.94);
+  color: #16181a;
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.service-map .leaflet-control-attribution a {
+  color: #16181a;
+}
+
+.service-map .leaflet-control-scale-line {
+  padding: 2px 6px 1px;
+  border: 2px solid var(--color-on-panel);
+  border-top: none;
+  background: transparent;
+  color: var(--color-on-panel);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.service-map .leaflet-bar,
+.service-map .leaflet-bar a,
+.service-map .leaflet-bar a:first-child,
+.service-map .leaflet-bar a:last-child {
+  border-radius: 0;
+}
+
+.service-map .leaflet-bar a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
