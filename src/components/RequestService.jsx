@@ -45,12 +45,6 @@ function RequestService() {
             Tell us what your vehicle needs.
           </motion.h2>
 
-          <motion.p className="request__copy" variants={rise}>
-            Complete the details below. Submitting the form will open your
-            messaging app with your service request prepared for{' '}
-            {BUSINESS.phoneDisplay}.
-          </motion.p>
-
           <motion.div className="request__actions" variants={rise}>
             <CtaButton
               variant="call"
@@ -60,7 +54,14 @@ function RequestService() {
             >
               Call {BUSINESS.phoneDisplay}
             </CtaButton>
+            <p className="request__primary-note">Call the shop directly.</p>
           </motion.div>
+
+          <motion.p className="request__copy" variants={rise}>
+            Use the form to prepare a text to {BUSINESS.phoneDisplay}. The
+            message stays here until you send it. This page does not send it
+            for you.
+          </motion.p>
 
           <motion.dl className="request__facts" variants={rise}>
             <div>
@@ -70,10 +71,6 @@ function RequestService() {
             <div>
               <dt>Service radius</dt>
               <dd>{BUSINESS.radius}</dd>
-            </div>
-            <div>
-              <dt>Availability</dt>
-              <dd>{BUSINESS.availability}</dd>
             </div>
           </motion.dl>
         </motion.div>

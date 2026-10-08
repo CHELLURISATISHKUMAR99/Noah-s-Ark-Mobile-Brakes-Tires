@@ -133,4 +133,5 @@ export const FOOTER_LINKS = [
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Service Area', href: '#coverage' },
   { label: 'Request Service', href: '#request-service' },
+  { label: 'Google reviews', href: '#reviews' },
 ]

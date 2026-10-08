@@ -17,7 +17,7 @@ const item = {
 const ENTRIES = [
   { label: 'Primary areas', value: BUSINESS.coverage },
   { label: 'Service radius', value: BUSINESS.radius },
-  { label: 'Availability', value: BUSINESS.availability },
+  { label: 'Hours', value: BUSINESS.hours },
 ]
 
 /**
@@ -31,7 +31,7 @@ function DispatchStrip() {
     <section
       className="dispatch"
       id="service-area"
-      aria-label="Service area and availability"
+      aria-label="Service area and hours"
     >
       <motion.dl
         className="dispatch__list"

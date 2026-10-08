@@ -2,13 +2,20 @@
 
 export const BUSINESS = {
   name: 'Noah’s Ark Mobile Brakes & Tires',
+  siteUrl: 'https://noahsarkmobilebrakes.com/',
   phoneDisplay: '(908) 279-2100',
   phoneHref: 'tel:+19082792100',
   hours: 'Monday–Saturday · 8 AM–7 PM',
   coverage:
-    'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway',
+    'Serving Plainfield, North Plainfield, South Plainfield, Edison & Piscataway, NJ',
   radius: 'Approximately 50-mile service area',
-  availability: 'Call to confirm availability',
+  // Confirmed Google Business Profile. The count and rating are the public
+  // totals only — do not add review quotes.
+  googleReviews: {
+    rating: '4.8',
+    count: 5,
+    url: 'https://share.google/fiwxfjsYPLUMgXSyt',
+  },
 }
 
 // Interim destination for "Request Service" until the form is built.
@@ -41,9 +48,8 @@ export const REQUEST_LABEL = `Request service by text message to ${BUSINESS.phon
  * is ever visible. To restore one, flip its flag back to true once the
  * matching section id is on the page.
  *
- * Note: the label "Request Service" is deliberately reserved for the future
- * on-site form. Anything that opens the SMS composer says "Text ..." instead,
- * so the label always matches what actually happens.
+ * "Text for Service" opens a text to the shop with a starter message.
+ * "Request Service" in the footer goes to the form.
  */
 export const NAV_LINKS = [
   { label: 'Services', href: '#services', enabled: true },
@@ -62,8 +68,9 @@ export const VISIBLE_NAV_LINKS = NAV_LINKS.filter((link) => link.enabled)
 
 export const HERO_IMAGE = {
   src: '/assets/images/hero-mobile-tire-service-1920.webp',
-  srcSet:
-    '/assets/images/hero-mobile-tire-service-900.webp 900w, /assets/images/hero-mobile-tire-service-1920.webp 1920w',
+  // Cropped to the mobile hero frame so phones do not download the tall 900px file.
+  // Desktop opts into the full portrait with a <picture> source.
+  mobileSrc: '/assets/images/hero-mobile-lcp.webp',
   width: 1920,
   height: 3412,
   alt: 'A technician kneeling on asphalt beside a black hatchback, fitting the front wheel by hand with an impact wrench resting on the ground beside him.',
@@ -147,7 +154,7 @@ export const SERVICES = [
     number: '06',
     slug: 'rotation-roadside',
     title: 'Rotation & roadside assistance',
-    copy: 'Tire rotation and emergency roadside tire help, subject to availability.',
+    copy: 'Tire rotation and emergency roadside tire help.',
     image: null,
     // Silent, decorative loop. The adjacent copy carries the meaning, so the
     // element is aria-hidden rather than captioned.
@@ -174,13 +181,13 @@ export const HOW_IT_WORKS_STEPS = [
   },
   {
     number: '02',
-    title: 'Confirm availability',
-    copy: 'We’ll review the request, confirm the service location, and discuss availability.',
+    title: 'We set a time',
+    copy: 'We look at the job and the location, then tell you when we can come.',
   },
   {
     number: '03',
     title: 'We come to you',
-    copy: 'Mobile service is performed at your home, workplace, or roadside location when available.',
+    copy: 'The work is done at your home, workplace, or the side of the road.',
   },
 ]
 

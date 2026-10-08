@@ -2,8 +2,6 @@
   background: var(--color-background);
   color: var(--color-foreground);
   border-top: 1px solid var(--color-hairline-on-light);
-  /* clears the sticky header when jumped to from the nav */
-  scroll-margin-top: var(--header-h-compact);
 }
 
 .how__inner {

@@ -2,7 +2,6 @@
   background: var(--color-panel);
   color: var(--color-on-panel);
   border-top: 1px solid var(--color-hairline-on-dark);
-  scroll-margin-top: var(--header-h-compact);
 }
 
 .request__inner {
@@ -50,7 +49,20 @@
 }
 
 .request__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
   margin-top: var(--space-2);
+}
+
+.request__primary-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-on-panel);
 }
 
 .request__facts {
@@ -106,6 +118,11 @@
     border-left: 0;
     padding-top: var(--space-8);
     border-top: 1px solid var(--color-hairline-on-dark);
+  }
+
+  .request__actions {
+    width: 100%;
+    align-items: stretch;
   }
 
   .request__actions .cta {

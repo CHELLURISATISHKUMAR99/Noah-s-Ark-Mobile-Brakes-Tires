@@ -169,6 +169,10 @@
   z-index: 40;
 }
 
+.header--compact .header__overlay {
+  top: var(--header-h-compact);
+}
+
 .header__panel {
   display: none;
   border-top: 1px solid var(--color-hairline-on-light);
@@ -216,6 +220,11 @@
     display: none;
   }
 
+  /* The desktop nav was the flex item that pinned actions to the right. */
+  .header__actions {
+    margin-left: auto;
+  }
+
   .header__panel {
     display: block;
     position: relative;
@@ -233,16 +242,19 @@
   display: none;
 }
 
-/* Space is tight below ~420px: swap to the shield mark and the short label. */
-@media (max-width: 419px) {
-  .header__logo--full {
-    display: none;
+/* 41px tall is about 162px wide — just above the 160px lockup minimum. */
+@media (max-width: 767px) {
+  .header__inner {
+    gap: var(--space-3);
   }
 
-  .header__logo--mark {
-    display: block;
+  .header__logo--full,
+  .header--compact .header__logo--full {
+    height: 41px;
   }
+}
 
+@media (max-width: 479px) {
   .header__call-long {
     display: none;
   }
@@ -253,6 +265,17 @@
 
   .header__call {
     padding: 0 var(--space-4);
+  }
+}
+
+/* Below this width a legal-size wordmark collides with Call and the menu. */
+@media (max-width: 389px) {
+  .header__logo--full {
+    display: none;
+  }
+
+  .header__logo--mark {
+    display: block;
   }
 }
 

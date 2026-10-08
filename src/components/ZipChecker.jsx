@@ -1,16 +1,12 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { BUSINESS, CALL_LABEL } from '../data/business'
 import { checkZip } from '../data/serviceArea'
 import './ZipChecker.css'
 
-/**
- * Format-only ZIP check. There is no coverage dataset yet, so a well-formed
- * ZIP always returns the same neutral answer — the component never claims a
- * location is inside or outside the service area.
- */
 function ZipChecker() {
   const inputId = useId()
   const statusId = useId()
+  const resultRef = useRef(null)
   const [zip, setZip] = useState('')
   const [result, setResult] = useState(null)
 
@@ -18,6 +14,11 @@ function ZipChecker() {
     event.preventDefault()
     setResult(checkZip(zip))
   }
+
+  useEffect(() => {
+    if (!result) return
+    resultRef.current?.scrollIntoView({ block: 'nearest' })
+  }, [result])
 
   const isInvalid = result?.state === 'invalid'
 
@@ -47,52 +48,26 @@ function ZipChecker() {
         Check My ZIP
       </button>
 
-      <p
-        className={`zip__status${result ? ` zip__status--${result.state}` : ''}`}
-        id={statusId}
-        role="status"
-        aria-live="polite"
-      >
-        {result && (
-          <>
-            <span className="zip__icon" aria-hidden="true">
-              {isInvalid ? (
-                <svg viewBox="0 0 16 16" width="15" height="15">
-                  <path
-                    fill="currentColor"
-                    d="M8 1 15 14H1zm-.85 4.6v4.1h1.7V5.6zM8 12.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
-                  />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 16 16" width="15" height="15">
-                  <path
-                    fill="currentColor"
-                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m.85 4.2v.9h-1.7v-.9zm-1.7 2.6h1.7v5h-1.7z"
-                  />
-                </svg>
-              )}
-            </span>
-            {/* Text prefix so the state never depends on colour alone. */}
-            <span className="zip__prefix">
-              {isInvalid ? 'Check your entry:' : 'Pending confirmation:'}
-            </span>{' '}
-            {result.message}
-            {result.state === 'pending' && (
-              <>
-                {' '}
-                <a
-                  className="zip__call"
-                  href={BUSINESS.phoneHref}
-                  aria-label={CALL_LABEL}
-                >
-                  Call {BUSINESS.phoneDisplay}
-                </a>{' '}
-                to confirm now.
-              </>
-            )}
-          </>
-        )}
-      </p>
+      {result && (
+        <div
+          className={`zip__result zip__result--${result.state}`}
+          id={statusId}
+          ref={resultRef}
+          role="status"
+          aria-live="polite"
+          tabIndex={-1}
+        >
+          <p className="zip__result-title">
+            {isInvalid ? 'Check the ZIP' : result.title}
+          </p>
+          <p className="zip__result-copy">{result.message}</p>
+          {!isInvalid && (
+            <a className="zip__call" href={BUSINESS.phoneHref} aria-label={CALL_LABEL}>
+              Call {BUSINESS.phoneDisplay}
+            </a>
+          )}
+        </div>
+      )}
     </form>
   )
 }

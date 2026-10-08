@@ -7,10 +7,13 @@ function ServicesSection() {
     <section className="services" id="services" aria-labelledby="services-heading">
       <div className="services__inner">
         <header className="services__head">
-          <p className="services__eyebrow">01 &mdash; 06</p>
+          <p className="services__eyebrow">What we do</p>
           <h2 className="services__heading" id="services-heading">
             Services
           </h2>
+          <p className="services__dek">
+            On-location brake and tire work.
+          </p>
         </header>
 
         <ol className="services__list">

@@ -4,9 +4,9 @@
 }
 
 /* Reserve room for the fixed mobile action bar so it never covers content. */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .app {
-    padding-bottom: calc(var(--actionbar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(var(--actionbar-h) + var(--space-4) + env(safe-area-inset-bottom, 0px));
   }
 }
 

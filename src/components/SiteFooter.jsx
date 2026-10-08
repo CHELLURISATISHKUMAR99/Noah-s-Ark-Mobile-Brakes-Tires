@@ -1,12 +1,11 @@
-import { BUSINESS } from '../data/business'
+import { BUSINESS, REQUEST_LABEL, SMS_HREF } from '../data/business'
 import { FOOTER_LINKS } from '../data/requestService'
 import { PRIMARY_AREAS } from '../data/serviceArea'
 import './SiteFooter.css'
 
 /**
- * Verified information only. No address, email, social profiles, licences,
- * certifications, reviews, or policy links exist for this business, so none
- * are shown.
+ * Verified information only. No address, email, or licence is shown.
+ * The Google rating in the reviews section is the public total only.
  */
 function SiteFooter() {
   const year = new Date().getFullYear()
@@ -23,13 +22,19 @@ function SiteFooter() {
             height="72"
           />
           <p className="footer__radius">{BUSINESS.radius}</p>
-          <p className="footer__note">{BUSINESS.availability}</p>
         </div>
 
         <div className="footer__col">
           <h2 className="footer__title">Contact</h2>
           <a className="footer__phone" href={BUSINESS.phoneHref}>
-            {BUSINESS.phoneDisplay}
+            Call {BUSINESS.phoneDisplay}
+          </a>
+          <a
+            className="footer__text"
+            href={SMS_HREF}
+            aria-label={REQUEST_LABEL}
+          >
+            Text {BUSINESS.phoneDisplay}
           </a>
           <p className="footer__hours">{BUSINESS.hours}</p>
         </div>
@@ -41,6 +46,7 @@ function SiteFooter() {
               <li key={area.name}>{area.name}</li>
             ))}
           </ul>
+          <p className="footer__hours">New Jersey</p>
         </div>
 
         <nav className="footer__col" aria-label="Footer">
@@ -59,7 +65,12 @@ function SiteFooter() {
 
       <div className="footer__bar">
         <p className="footer__copyright">
-          &copy; {year} {BUSINESS.name}
+          <span>
+            &copy; {year} {BUSINESS.name}
+          </span>
+          <a className="footer__site" href={BUSINESS.siteUrl}>
+            noahsarkmobilebrakes.com
+          </a>
         </p>
       </div>
     </footer>

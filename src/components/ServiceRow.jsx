@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { BUSINESS, smsHrefForService } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import ServiceVideo from './ServiceVideo'
 import './ServiceRow.css'
 
@@ -30,7 +29,6 @@ const revealImage = {
 function ServiceRow({ service, reversed }) {
   const rowRef = useRef(null)
   const reduceMotion = useReducedMotion()
-  const smsCapable = useSmsCapable()
 
   const { scrollYProgress } = useScroll({
     target: rowRef,
@@ -40,12 +38,8 @@ function ServiceRow({ service, reversed }) {
   // exposes an edge and nothing reflows.
   const imageY = useTransform(scrollYProgress, [0, 1], ['-2.5%', '2.5%'])
 
-  // Desktop cannot usefully open an sms: URI, so it goes to the on-page form
-  // instead. Same helper the header, hero and action bar use.
-  const href = resolveTextHref(smsHrefForService(service.title), smsCapable)
-  const label = smsCapable
-    ? `Text for service: ${service.title}, to ${BUSINESS.phoneDisplay}`
-    : `Text for Service: ${service.title} — go to the request form`
+  const href = smsHrefForService(service.title)
+  const label = `Text for service: ${service.title}, to ${BUSINESS.phoneDisplay}`
   const hasVideo = Boolean(service.video)
 
   const classes = [
@@ -105,20 +99,27 @@ function ServiceRow({ service, reversed }) {
 
       {service.image && (
         <motion.div className="service-row__media" variants={revealImage}>
-          <motion.img
-            className="service-row__image"
-            src={service.image.src}
-            width={service.image.width}
-            height={service.image.height}
-            alt={service.image.alt}
-            loading="lazy"
-            decoding="async"
-            style={{
-              objectPosition: service.image.objectPosition,
-              ...(service.image.filter ? { filter: service.image.filter } : {}),
-              ...(reduceMotion ? {} : { y: imageY }),
-            }}
-          />
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              srcSet={service.image.src.replace('-900.webp', '-1920.webp')}
+            />
+            <motion.img
+              className="service-row__image"
+              src={service.image.src}
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              width={service.image.width}
+              height={service.image.height}
+              alt={service.image.alt}
+              loading="lazy"
+              decoding="async"
+              style={{
+                objectPosition: service.image.objectPosition,
+                ...(service.image.filter ? { filter: service.image.filter } : {}),
+                ...(reduceMotion ? {} : { y: imageY }),
+              }}
+            />
+          </picture>
         </motion.div>
       )}
     </motion.li>

@@ -39,8 +39,8 @@ function ServiceArea() {
           </motion.h2>
 
           <motion.p className="area__copy" variants={rise}>
-            Enter your ZIP code to request an availability confirmation for your
-            area.
+            Enter a ZIP code. We will say if it is one of the five towns, a
+            nearby town, or outside that area.
           </motion.p>
 
           <motion.div className="area__checker" variants={rise}>
@@ -48,14 +48,13 @@ function ServiceArea() {
           </motion.div>
 
           <motion.div className="area__facts" variants={rise}>
-            <h3 className="area__facts-title">Primary areas</h3>
+            <h3 className="area__facts-title">Primary areas in New Jersey</h3>
             <ul className="area__areas">
               {PRIMARY_AREAS.map((area) => (
                 <li key={area.name}>{area.name}</li>
               ))}
             </ul>
             <p className="area__radius">{BUSINESS.radius}</p>
-            <p className="area__note">{BUSINESS.availability}</p>
           </motion.div>
         </motion.div>
 

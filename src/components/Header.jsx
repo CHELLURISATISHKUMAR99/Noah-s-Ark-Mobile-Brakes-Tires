@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { useMotionValueEvent, useScroll } from 'motion/react'
 import { BUSINESS, CALL_LABEL, VISIBLE_NAV_LINKS } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import './Header.css'
 
@@ -14,14 +12,12 @@ function Header() {
   const toggleRef = useRef(null)
   const panelRef = useRef(null)
 
-  // Motion drives the compact state; the height change itself is a CSS
-  // transition so we never animate layout from JS.
-  const smsCapable = useSmsCapable()
-
-  const { scrollY } = useScroll()
-  useMotionValueEvent(scrollY, 'change', (value) => {
-    setIsCompact(value > 24)
-  })
+  useEffect(() => {
+    const onScroll = () => setIsCompact(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false)
@@ -78,22 +74,18 @@ function Header() {
   return (
     <header className={`header${isCompact ? ' header--compact' : ''}`}>
       <div className="header__inner">
-        <a
-          className="header__brand"
-          href="/"
-          aria-label={`${BUSINESS.name} — home`}
-        >
+        <a className="header__brand" href="/">
           <img
             className="header__logo header__logo--full"
             src="/assets/logo/logo-horizontal-dark.svg"
-            alt=""
+            alt={BUSINESS.name}
             width="284"
             height="72"
           />
           <img
             className="header__logo header__logo--mark"
             src="/assets/logo/logo-shield-color.svg"
-            alt=""
+            alt={BUSINESS.name}
             width="64"
             height="72"
           />
@@ -105,12 +97,8 @@ function Header() {
               <li key={link.href}>
                 <a
                   className="header__nav-link"
-                  href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={
-                    link.ariaLabel && !smsCapable && link.href.startsWith('sms:')
-                      ? `${link.label} — go to the request form`
-                      : link.ariaLabel
-                  }
+                  href={link.href}
+                  aria-label={link.ariaLabel}
                 >
                   {link.label}
                 </a>
@@ -175,12 +163,8 @@ function Header() {
               <li key={link.href}>
                 <a
                   className="header__panel-link"
-                  href={resolveTextHref(link.href, smsCapable)}
-                  aria-label={
-                    link.ariaLabel && !smsCapable && link.href.startsWith('sms:')
-                      ? `${link.label} — go to the request form`
-                      : link.ariaLabel
-                  }
+                  href={link.href}
+                  aria-label={link.ariaLabel}
                   onClick={closeMenu}
                 >
                   {link.label}

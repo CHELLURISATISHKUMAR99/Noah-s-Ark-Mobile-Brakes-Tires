@@ -8,7 +8,6 @@ import {
   REQUEST_LABEL,
   SMS_HREF,
 } from '../data/business'
-import { resolveTextHref, useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import ProcessStep from './ProcessStep'
 import './HowItWorks.css'
@@ -38,7 +37,6 @@ const revealImage = {
 function HowItWorks() {
   const sectionRef = useRef(null)
   const reduceMotion = useReducedMotion()
-  const smsCapable = useSmsCapable()
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -92,8 +90,7 @@ function HowItWorks() {
           </motion.h2>
 
           <motion.p className="how__copy" variants={rise}>
-            Tell us what your vehicle needs and where you are. We’ll confirm
-            availability before dispatching mobile service.
+            Tell us what your vehicle needs and where you are. We come to you.
           </motion.p>
 
           <motion.ol className="how__steps" variants={stepList}>
@@ -110,7 +107,6 @@ function HowItWorks() {
           <motion.ul className="how__note" variants={rise}>
             <li>{BUSINESS.hours}</li>
             <li>{BUSINESS.radius}</li>
-            <li>{BUSINESS.availability}</li>
           </motion.ul>
 
           <motion.div className="how__actions" variants={rise}>
@@ -125,17 +121,8 @@ function HowItWorks() {
             <CtaButton
               variant="request"
               tone="light"
-              href={resolveTextHref(SMS_HREF, smsCapable)}
-              aria-label={
-                smsCapable
-                  ? REQUEST_LABEL
-                  : 'Text for Service — go to the request form'
-              }
-              title={
-                smsCapable
-                  ? REQUEST_LABEL
-                  : 'Text for Service — go to the request form'
-              }
+              href={SMS_HREF}
+              aria-label={REQUEST_LABEL}
             >
               Text for Service
             </CtaButton>

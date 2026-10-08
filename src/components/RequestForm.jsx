@@ -12,7 +12,7 @@ import { useSmsCapable } from '../hooks/useSmsCapable'
 import CtaButton from './CtaButton'
 import './RequestForm.css'
 
-const COPY_PROMPT = `This website is not sending your request. Copy it and call or text ${BUSINESS.phoneDisplay}.`
+const COPY_PROMPT = `Nothing is sent until you send it. Copy this text, or open it as a text to ${BUSINESS.phoneDisplay}.`
 const COPIED = `Request copied. Call ${BUSINESS.phoneDisplay} or text it from your phone.`
 const COPY_FALLBACK = 'Clipboard access is unavailable, so the request is selected for you — press Ctrl+C (or Cmd+C) to copy it.'
 
@@ -27,6 +27,7 @@ function RequestForm({ idPrefix }) {
   const [wasSubmitted, setWasSubmitted] = useState(false)
   const [status, setStatus] = useState('')
   const [prepared, setPrepared] = useState('')
+  const [smsHref, setSmsHref] = useState('')
   const [copyStatus, setCopyStatus] = useState('')
   const fieldRefs = useRef({})
   const resultRef = useRef(null)
@@ -78,20 +79,23 @@ function RequestForm({ idPrefix }) {
       return
     }
 
+    const body = buildRequestBody(values)
+    const href = buildRequestSmsHref(values)
+    setCopyStatus('')
+    setPrepared(body)
+    setSmsHref(href)
+
     if (smsCapable) {
-      setPrepared('')
       setStatus(
-        'Your messaging app should now open with your request prepared. Nothing is sent until you send the message yourself.',
+        'Your messaging app should open with this text. Nothing is sent until you press send. The same text is shown here if you need to copy it.',
       )
-      window.location.href = buildRequestSmsHref(values)
+      window.location.assign(href)
       return
     }
 
-    // Desktop: never hand an sms: URI to the OS app picker. Show the prepared
-    // text so it can be copied, called in, or sent from a phone.
-    setStatus('')
-    setCopyStatus('')
-    setPrepared(buildRequestBody(values))
+    setStatus(
+      'Nothing was sent from this website. Copy the text, or open it in a messaging app and press send.',
+    )
   }
 
   // Focus the result once it exists so keyboard and screen-reader users land
@@ -117,8 +121,21 @@ function RequestForm({ idPrefix }) {
 
   const errorCount = Object.keys(errors).length
 
+  const noticeId = `${idPrefix}-notice`
+
   return (
     <form className="request-form" onSubmit={onSubmit} noValidate>
+      <div className="request-form__notice" id={noticeId}>
+        <p className="request-form__notice-title">
+          This prepares a text. It does not send it.
+        </p>
+        <p className="request-form__notice-copy">
+          When you submit, the message is shown here so you can copy it. On a
+          phone, your messaging app opens with the same text. You still press
+          send.
+        </p>
+      </div>
+
       <p className="request-form__legend">
         All fields marked <span className="request-form__req">required</span>{' '}
         must be completed.
@@ -135,6 +152,8 @@ function RequestForm({ idPrefix }) {
           ref: (node) => {
             fieldRefs.current[field.name] = node
           },
+          required: field.required || undefined,
+          'aria-required': field.required || undefined,
           'aria-invalid': invalid || undefined,
           'aria-describedby': invalid ? errorId(field.name) : undefined,
           className: `request-form__control${invalid ? ' request-form__control--invalid' : ''}`,
@@ -203,15 +222,17 @@ function RequestForm({ idPrefix }) {
       })}
 
       <div className="request-form__actions">
-        <button className="request-form__submit" type="submit">
+        <button
+          className="request-form__submit"
+          type="submit"
+          aria-describedby={noticeId}
+        >
           Prepare Service Text
         </button>
       </div>
 
       <p className="request-form__disclosure">
-        {smsCapable
-          ? 'Submitting opens your messaging app. Your request is not sent until you send the message. Message and data rates may apply.'
-          : 'Submitting prepares your request on this page for you to copy. Your request is not sent until you call or text it yourself. Message and data rates may apply.'}
+        Message and data rates may apply when you send the text.
       </p>
 
       {prepared && (
@@ -219,9 +240,9 @@ function RequestForm({ idPrefix }) {
           className="request-form__result"
           ref={resultRef}
           tabIndex={-1}
-          aria-labelledby="prepared-heading"
+          aria-labelledby={`${idPrefix}-prepared-heading`}
         >
-          <h3 className="request-form__result-title" id="prepared-heading">
+          <h3 className="request-form__result-title" id={`${idPrefix}-prepared-heading`}>
             Your prepared request
           </h3>
           <p className="request-form__result-copy">{COPY_PROMPT}</p>
@@ -236,6 +257,11 @@ function RequestForm({ idPrefix }) {
           />
 
           <div className="request-form__result-actions">
+            {smsHref && (
+              <a className="request-form__sms" href={smsHref}>
+                Open text message
+              </a>
+            )}
             <button
               className="request-form__copy"
               type="button"
