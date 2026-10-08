@@ -2,17 +2,18 @@
  * Service-area configuration, kept separate from the approved content in
  * business.js so that file stays untouched.
  *
- * Coordinates are published town centers for the five primary areas. The map
- * marks those towns. They are not a street address — this business does not
- * publish one.
+ * Coordinates are town centers for the five primary areas. South Plainfield,
+ * Edison, and Piscataway use the OpenStreetMap place nodes the basemap labels
+ * are drawn on. Plainfield and North Plainfield use separated centers inside
+ * each town so the two pins do not stack. They are not a street address.
  */
 
 export const PRIMARY_AREAS = [
   { name: 'Plainfield', lat: 40.6337, lon: -74.4074 },
-  { name: 'North Plainfield', lat: 40.6298, lon: -74.4288 },
-  { name: 'South Plainfield', lat: 40.5793, lon: -74.4118 },
-  { name: 'Edison', lat: 40.5187, lon: -74.4121 },
-  { name: 'Piscataway', lat: 40.4993, lon: -74.3899 },
+  { name: 'North Plainfield', lat: 40.6301, lon: -74.4274 },
+  { name: 'South Plainfield', lat: 40.5793, lon: -74.4115 },
+  { name: 'Edison', lat: 40.5005, lon: -74.3984 },
+  { name: 'Piscataway', lat: 40.5464, lon: -74.4661 },
 ]
 
 export const ZIP_PATTERN = /^\d{5}(-\d{4})?$/

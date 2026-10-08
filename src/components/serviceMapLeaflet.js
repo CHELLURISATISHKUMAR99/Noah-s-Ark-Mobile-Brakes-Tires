@@ -14,9 +14,9 @@ const METERS_PER_MILE = 1609.344
 const LABEL_DIRECTION = {
   Plainfield: 'right',
   'North Plainfield': 'left',
-  'South Plainfield': 'right',
-  Edison: 'left',
-  Piscataway: 'right',
+  'South Plainfield': 'left',
+  Edison: 'right',
+  Piscataway: 'left',
 }
 
 function milesBetween(a, b) {
@@ -97,10 +97,12 @@ export function mountServiceMap(container) {
       alt: `${area.name}, New Jersey`,
     }).addTo(map)
 
+    const offset =
+      direction === 'left' ? [-12, 0] : direction === 'top' ? [0, -12] : [12, 0]
     marker.bindTooltip(area.name, {
       permanent: true,
       direction,
-      offset: direction === 'left' ? [-10, 0] : [10, 0],
+      offset,
       className: 'service-map__label',
       opacity: 1,
     })
@@ -119,7 +121,8 @@ export function mountServiceMap(container) {
     if (container.clientHeight < 200) return false
     // Frame the five towns, not the whole ring, so street names stay readable.
     map.fitBounds(townBounds, {
-      padding: [40, 22],
+      paddingTopLeft: [48, 28],
+      paddingBottomRight: [56, 32],
       maxZoom: 12,
       animate: false,
     })
